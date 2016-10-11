@@ -1,0 +1,66 @@
+  <% if current_user && @user.id == current_user.id %>
+    <% @display_name = "Your" %>
+    <% @past = "" %> 
+  <% else %>
+    <% @display_name = "#{@user.name}'s" %>
+    <% @past = "is" %>
+  <% end %>
+
+  <title><%= @display_name %> Profile</title>
+
+  <h1 style="text-align: center;"><%= @display_name %> Profile</h1>
+  <hr>
+
+  <!-- Page Content -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-3 text-center">
+              <p class="lead">Jump to a category</p>
+              <div class="list-group">
+                  <a href="#upcoming" class="list-group-item"><%= @display_name %> Upcoming Events</a>
+                  <a href="#past" class="list-group-item"><%= @display_name %> Past Events</a>
+                  <a href="#attending" class="list-group-item">Events <%= @display_name %> <%= @past %> Attending</a>
+              </div>
+          </div>
+
+          <div class="col-md-9 text-center">
+              <div class="row">
+                <h3 id="upcoming" style="text-align: center;"><%= @display_name %> Upcoming Events (<%= @user.upcoming_events.count %>)</h3>
+                <hr>
+                <% if @user.upcoming_events.any? %>
+                  <%= render @upcoming_events %>
+                <% elsif current_user && @user.id == current_user.id %>
+                  <p>Events you create will show up here</p>
+                <% else %>
+                  <p>No upcoming events</p>
+                <% end %>
+              </div>
+
+              <div class="row">
+                <h3 id="past" style="text-align: center;"><%= @display_name %> Past Events (<%= @user.past_events.count %>)</h3>
+                <hr>
+                <% if @user.past_events.any? %>
+                  <%= render @past_events %>
+                <% elsif current_user && @user.id == current_user.id %>
+                  <p>Your past events will show up here</p>
+                <% else %>
+                  <p>No past events</p>
+                <% end %> 
+              </div>
+
+              <div class="row">
+                <h3 id="attending" style="text-align: center;">Events <%= @display_name %> <%= @past %> Attending (<%= @events_attending.count %>)</h3>
+                <hr>
+                <% if @events_attending.any? %>
+                  <%= render @events_attending %>
+                <% elsif current_user && @user.id == current_user.id %>
+                  <p>Events you select to attend will show up here</p>
+                <% else %>
+                  <p><%= @user.name %> is not attending any evetns yet</p>
+                <% end %>          
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- /.container -->
+

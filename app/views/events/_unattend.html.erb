@@ -1,0 +1,3 @@
+<%= form_for(current_user.active_attends.find_by(attended_event_id: @event.id), html: { method: :delete }, remote: true) do |f| %>
+  <p class="lead" style="text-align:center;"><%= f.submit "Unattend Event", class: "btn btn-primary" %></p>
+<% end %>

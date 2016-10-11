@@ -1,0 +1,3 @@
+$("#attend_form").html("<%= escape_javascript(render('events/attend')) %>");
+$("#attendees").html('<%= @event.attendees.count %>');
+$("#users_attending").html('<% if @event.attendees.any? %><% @event.attendees.each do |user| %><li style="text-align:center; list-style: none;">Name: <%= link_to user.name, user %></li><% end %><% end %>');

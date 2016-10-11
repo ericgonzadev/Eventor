@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<!-- Bootstrap Core CSS -->
+	<%= stylesheet_link_tag 'bootstrap.min' %>
+
+	<!-- Google Fonts -->
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+	
+	<!-- Application Stylesheets -->
+	<%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true %>
+	
+	<!-- Meta Tags -->
+	<%= csrf_meta_tags %>
+</head>
+<body>
+	<nav id="mainNav" class="navbar navbar-default navbar-fixed-top" style="background-color: #F05F40;">
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+				</button>
+				<%= link_to "Eventor", root_path, class: "navbar-brand page-scroll", style: "color: white;" %>
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" >
+				<ul class="nav navbar-nav navbar-right">
+					<li><%= link_to "Home", root_path %></li>
+					<li><%= link_to "Events", events_path %></li>
+					<% if current_user %>
+						<li><%= link_to "Create Event", create_event_path %></li>
+						<li><%= link_to "Profile", current_user %></li>
+						<li><%= link_to "Logout", logout_path, method: "delete" %></li>
+					<% else %>                
+						<li><%= link_to "Sign Up", signup_path %></li>
+						<li><%= link_to "Login", login_path %></li>
+					<% end %>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<%= yield %>
+
+	<div class="container">
+		<!-- Footer -->
+		<footer>
+			<div class="navbar-header">
+				Copyright &copy; Eric Gonzalez 2016
+			</div>
+			<ul id="social-links" class="pull-right">
+				<li><a href="#"><i class="fa fa-facebook fa-lg"></i></a></li> 
+				<li><a href="#"><i class="fa fa-twitter fa-lg"></i></a></li>
+				<li><a href="#"><i class="fa fa-github fa-lg"></i> Source Code</a></li>     
+			</ul>
+		</footer>
+	</div>
+
+	<%= debug(params) if Rails.env.development? %>
+
+	<!-- jQuery -->
+	<%= javascript_include_tag 'jquery.min.js' %>
+
+	<!-- Bootstrap Core JavaScript -->
+	<%= javascript_include_tag 'bootstrap.min.js' %>
+
+	<!-- Plugin JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+
+	<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</body>
+</html>
+
+
+

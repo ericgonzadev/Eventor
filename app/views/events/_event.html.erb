@@ -1,0 +1,17 @@
+	<div class="col-sm-4 col-lg-4 col-md-4">
+	    <a href=<%= "/events/#{event.id}" %>><div class="thumbnail">
+	        <img src="http://placehold.it/320x150" alt=""></a>
+	         <div class="caption">
+	            <h4><%= link_to "Event Name: #{event.title}", event %></h4>  	            
+	            <p>Created by: <%= link_to event.user.name, event.user %><br>
+	            Date: <%= event.date.to_formatted_s(:long_ordinal) %></p>
+	        </div>
+	        <div class="ratings">
+	        	<% if event.date > Time.now %>
+						  <p><%= event.attendees.count %> people attending</p>
+					  <% else %>
+						  	<p><%= event.attendees.count%> people attended</p>
+					  <% end %>
+	        </div>
+	    </div>
+	</div>
