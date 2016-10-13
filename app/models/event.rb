@@ -14,4 +14,7 @@ class Event < ActiveRecord::Base
 		Event.all.where("date < ?", Time.now)
 	end
 
+	def is_valid_date
+		self.date < Time.now.advance(days: 1) ? false : true
+	end
 end

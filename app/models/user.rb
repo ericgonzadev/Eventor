@@ -4,11 +4,10 @@ class User < ActiveRecord::Base
 	has_many :attending, through: :active_attends, source: :attended_event
 	before_validation :normalize_name, on: :create
 	before_save :downcase_email
-	has_secure_password
 	validates :name, presence: true, length: {maximum: 50}
-	validates :email, presence: true, length: {maximum: 50}, uniqueness: true
-	validates :password, presence: true
-	validates :password_confirmation, presence: true
+	validates :email, presence: true, length: {maximum: 50}, uniqueness: { case_sensitive: false }
+  validates :password, length: {minimum: 4}
+  has_secure_password
 
 	#Adds user to attend list for event
   def attend(event)

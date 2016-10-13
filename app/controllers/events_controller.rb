@@ -12,11 +12,14 @@ class EventsController < ApplicationController
 
   def create
   	@event = current_user.events.build(event_params)
-  	if @event.save
+    valid_date = @event.is_valid_date
+
+  	if @event.save && valid_date
       current_user.attend(@event)
   		redirect_to @event
   	else
-  		render :new
+  		flash.now[:danger] = "Event date must be 1 or more days prior to now" if !valid_date
+      render :new
   	end
   end
 
@@ -33,9 +36,12 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     authorized?(@event)
-    if @event.update(event_params)
+    valid_date = Event.new(event_params).is_valid_date
+
+    if @event.update(event_params) && valid_date
       redirect_to @event
     else
+      flash.now[:danger] = "Event date must be 1 or more days prior to now" if !valid_date
       render :edit
     end
   end

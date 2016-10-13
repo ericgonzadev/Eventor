@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   get '/create-event',  to: 'events#new'
   post '/create-event',  to: 'events#create'
+  patch '/create-event',  to: 'events#create'
 
   resources :users do
     member do

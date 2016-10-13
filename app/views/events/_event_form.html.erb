@@ -1,4 +1,5 @@
-  <%= form_for(@event, url: url) do |f| %>  
+  <%= form_for(@event, url: url) do |f| %> 
+    <%= render "shared/error_messages", object: f.object %>
     <div class="row">
       <div class="col-lg-6 col-lg-offset-3">
         <%= f.label :title %>
@@ -18,9 +19,9 @@
     <div class="row">
       <div class="col-lg-6 col-lg-offset-3">
         <%= f.label :date %><br>
-    		<%= f.datetime_select :date, :ampm => true, :minute_step => 15%>
+    		<%= f.datetime_select :date, options = {ampm: true, minute_step: 15, start_year: Date.today.year, end_year: Date.today.year + 5, order: [:month, :day, :year], default: Time.now} %>
       </div>
     </div>
 
-    <%= f.submit "Create Event", class: "btn btn-primary", style: "margin-top: 20px;" %>
+    <%= f.submit button, class: "btn btn-primary", style: "margin-top: 20px;" %>
   <% end %>

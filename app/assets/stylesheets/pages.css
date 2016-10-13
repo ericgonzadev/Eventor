@@ -377,3 +377,7 @@ body {
   display: inline;
   margin-right:  20px;
 }
+#errors{
+  list-style: none;
+  color: red;
+}
