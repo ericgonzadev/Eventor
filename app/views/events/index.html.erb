@@ -3,25 +3,25 @@
 	<!-- Custom CSS -->
 	<%= stylesheet_link_tag 'events-index' %>
 
-  <!-- Page Content -->
-  <div class="container">
-      <div class="row">
-          <div class="col-md-3">
-              <p class="lead">Jump to a category</p>
-              <div class="list-group">
-                  <a href="#upcoming" class="list-group-item">Upcoming Events</a>
-                  <a href="#past" class="list-group-item">Past Events</a>
-                  <% if current_user %>
-                  	<a href=<%= "users/#{current_user.id}" %> class="list-group-item">Your Events</a>
-                	<% end %>
-              </div>
-          </div>
+	<!-- Page Content -->
+	<div class="container">
+			<div class="row">
+					<div class="col-md-3">
+							<p class="lead">Jump to a category</p>
+							<div class="list-group">
+									<a href="#upcoming" class="list-group-item">Upcoming Events</a>
+									<a href="#past" class="list-group-item">Past Events</a>
+									<% if current_user %>
+										<a href=<%= "users/#{current_user.id}" %> class="list-group-item">Your Events</a>
+									<% end %>
+							</div>
+					</div>
 
-          <div class="col-md-9">
-            <div class="row">
-            	<h3 id="upcoming" style="text-align: center;">Upcoming Events (<%= @upcoming_events.count %>)</h3>
-            	<hr>
-            	<% if @upcoming_events.any? %>
+					<div class="col-md-9">
+						<div class="row">
+							<h3 id="upcoming" style="text-align: center;">Upcoming Events (<%= @upcoming_events.count %>)</h3>
+							<hr>
+							<% if @upcoming_events.any? %>
 								<%= render @upcoming_events %>
 							<% end %>
 						</div>
@@ -32,8 +32,8 @@
 							<% if @past_events.any? %>
 								<%= render @past_events %>
 							<% end %>            
-            </div>
-          </div>
-      </div>
-  </div>
-  <!-- /.container -->
+						</div>
+					</div>
+			</div>
+	</div>
+	<!-- /.container -->

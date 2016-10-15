@@ -1,27 +1,27 @@
-  <%= form_for(@event, url: url) do |f| %> 
-    <%= render "shared/error_messages", object: f.object %>
-    <div class="row">
-      <div class="col-lg-6 col-lg-offset-3">
-        <%= f.label :title %>
-        <%= f.text_field :title, class: "form-control" %>
-        <p class="help-block"></p>
-      </div> 
-    </div> 
+	<%= form_for(@event, url: url) do |f| %> 
+		<%= render "shared/error_messages", object: f.object %>
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3">
+				<%= f.label :title %>
+				<%= f.text_field :title, class: "form-control" %>
+				<p class="help-block"></p>
+			</div> 
+		</div> 
 
-    <div class="row">
-      <div class="col-lg-6 col-lg-offset-3">
-        <%= f.label :description %>
-        <%= f.text_area :description, style: "resize: none;", rows: "10", class: "form-control" %>
-        <p class="help-block"></p>
-      </div>
-    </div>
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3">
+				<%= f.label :description %>
+				<%= f.text_area :description, style: "resize: none;", rows: "10", class: "form-control" %>
+				<p class="help-block"></p>
+			</div>
+		</div>
 
-    <div class="row">
-      <div class="col-lg-6 col-lg-offset-3">
-        <%= f.label :date %><br>
-    		<%= f.datetime_select :date, options = {ampm: true, minute_step: 15, start_year: Date.today.year, end_year: Date.today.year + 5, order: [:month, :day, :year], default: Time.now} %>
-      </div>
-    </div>
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3">
+				<%= f.label :date %><br>
+				<%= f.datetime_select :date, options = {ampm: true, minute_step: 15, start_year: Date.today.year, end_year: Date.today.year + 5, order: [:month, :day, :year], default: Time.now} %>
+			</div>
+		</div>
 
-    <%= f.submit button, class: "btn btn-primary", style: "margin-top: 20px;" %>
-  <% end %>
+		<%= f.submit button, class: "btn btn-primary", style: "margin-top: 20px;" %>
+	<% end %>
