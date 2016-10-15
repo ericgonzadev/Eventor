@@ -381,3 +381,11 @@ body {
   list-style: none;
   color: red;
 }
+#separator {
+  border-color: black;
+  border-width: 1px;
+  max-width: 100%;
+}
+textarea{
+  resize: none;
+}

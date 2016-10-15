@@ -1,175 +1,142 @@
   <title><%= @event.title %></title>  
 
-    <!-- Page Content -->
-    <div class="container">
+  <!-- Page Content -->
+  <div class="container">
 
-        <div class="row">
+      <div class="row">
 
-            <!-- Blog Post Content Column -->
-            <div class="col-lg-8">
+          <!-- Event Post Content Column -->
+          <div class="col-lg-8">
 
-                <!-- Blog Post -->
+              <!-- Event Post -->
 
-                <!-- Title -->
-                <h1 style="text-align:center;"><%= @event.title %></h1>
-                <hr>
+              <!-- Title -->
+              <h1 style="text-align:center;"><%= @event.title %></h1>
+              <hr>
 
-                <!-- Author -->
-                <p class="lead" style="text-align:center;">
-                    Created by: <%= link_to @event.user.name, @event.user %>
-                </p>
+              <!-- Author -->
+              <p class="lead" style="text-align:center;">
+                  Created by: <%= link_to @event.user.name, @event.user %>
+              </p>
 
-                <!-- Date/Time -->
-                <p class="lead" style="text-align:center;"><i class="fa fa-calendar"></i> Event Date: <%= @event.date.to_formatted_s(:long_ordinal) %></p>
+              <!-- Date/Time -->
+              <p class="lead" style="text-align:center;"><i class="fa fa-calendar"></i> Event Date: <%= @event.date.to_formatted_s(:long_ordinal) %></p>
 
-                <!-- Preview Image -->
-                <img class="img-responsive" src="http://placehold.it/900x300" alt=""><br>
+              <!-- Preview Image -->
+              <img class="img-responsive" src="http://placehold.it/900x300" alt=""><br>
 
-                <!-- Post Content -->
-                <p class="lead">Event Description: <%= @event.description %></p><br>
+              <!-- Post Content -->
+              <p class="lead">Event Description: <%= @event.description %></p><br>
 
-                <% if current_user && @event.date > Time.now%>
-        				  <% unless current_user.id == @creator.id %>
-        				  	<div id="attend_form" >
-          					  <% if current_user.attending?(@event) %>
-          					  	<%= render "unattend" %>
-          					  <% else %>
-          					  	<%= render "attend" %>
-          					  <% end %>
-        						</div>
-        					<% else %>	
-        					  <p class="lead" style="text-align:center;"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", style: "margin-right: 20px;" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
-        					<% end %>
-        				<% end %><br>
+              <% if current_user && @event.date > Time.now%>
+      				  <% unless current_user.id == @event.user_id %>
+      				  	<div id="attend_form" >
+        					  <% if current_user.attending?(@event) %>
+        					  	<%= render "unattend" %>
+        					  <% else %>
+        					  	<%= render "attend" %>
+        					  <% end %>
+      						</div>
+      					<% else %>	
+      					  <p class="lead" style="text-align:center;"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", style: "margin-right: 20px;" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+      					<% end %>
+      				<% end %><br>
 
-                <% if !current_user %>  
-                  <p class="lead" style="text-align:center; color: red;">(Please log in or sign up to attend this event)</p>
-                <% end %><br>
+              <% if !current_user %>  
+                <h4 class="lead" style="text-align:center; color: red;">(Please log in or sign up to attend and comment on this event)</h4>
+              <% end %><br>
 
-        			  <p class="lead" style="text-align:center;">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</h1>
-        			  <hr>
-        			  <div id="users_attending">
-        			  	<% if @event.attendees.any? %>
-        				  	<% @event.attendees.each do |user| %>
-        						  <li style="text-align:center; list-style: none;">Name: <%= link_to user.name, user %></li>
+      			  <p class="lead" style="text-align:center;">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
+      			  <hr>
+      			  <div id="users_attending" style="margin-bottom: 20px;">
+      			  	<% if @event.attendees.any? %>
+      				  	<% @event.attendees.each do |user| %>
+      						  <li style="text-align:center; list-style: none; font-size: 16px;">Name: <%= link_to user.name, user %></li>
         					<% end %>
         				<% end %>
-        			</div>
+      			  </div>
 
-                <!-- Blog Comments -->
+              <hr id="separator">
 
-                <!-- Comments Form -->
-                <!-- <div class="well">
+              <!-- Event Comments -->
+              <h3 style="text-align:center;">Comments (<%= @event.comments.count %>)</h3>
+              <hr>
+
+              <% if @event.comments.any? %>
+                <div class="media" ">
+                  <%= render 'comment', collection: @event.comments %>
+                </div>
+              <% else %>
+                <div class="media" style="margin-bottom: 20px;">
+                  <h4 style="text-align: center;">No comments</h4>
+                </div>
+              <% end %>
+
+
+              <% if current_user %>
+                <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
-                        <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                </div>
-
-                <hr> -->
-
-                <!-- Posted Comments -->
-
-                <!-- Comment -->
-                <!-- <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div> -->
-
-                <!-- Comment -->
-               <!--  <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus. -->
-                        <!-- Nested Comment -->
-                        <!-- <div class="media">
-                            <a class="pull-left" href="#">
-                                <img class="media-object" src="http://placehold.it/64x64" alt="">
-                            </a>
-                            <div class="media-body">
-                                <h4 class="media-heading">Nested Start Bootstrap
-                                    <small>August 25, 2014 at 9:30 PM</small>
-                                </h4>
-                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                            </div>
-                        </div> -->
-                        <!-- End Nested Comment -->
-                    <!-- </div>
-                </div> -->
-
+                    <%= render 'comments/form' %>
+                  </div>
+              <% end %>
             </div>
 
-            <!-- Blog Sidebar Widgets Column -->
-            <div class="col-md-4">
+          <!-- Event Sidebar Widgets Column -->
+          <div class="col-md-4">
 
-                <!-- Blog Search Well -->
-                <div class="well">
-                    <h4>Blog Search</h4>
-                    <div class="input-group">
-                        <input type="text" class="form-control">
-                        <span class="input-group-btn">
-                            <button class="btn btn-default" type="button">
-                                <span class="glyphicon glyphicon-search"></span>
-                        </button>
-                        </span>
-                    </div>
-                    <!-- /.input-group -->
-                </div>
+              <!-- Event Search Well -->
+              <div class="well">
+                  <h4>Event Search</h4>
+                  <div class="input-group">
+                      <input type="text" class="form-control">
+                      <span class="input-group-btn">
+                          <button class="btn btn-default" type="button">
+                              <span class="glyphicon glyphicon-search"></span>
+                      </button>
+                      </span>
+                  </div>
+                  <!-- /.input-group -->
+              </div>
 
-                <!-- Blog Categories Well -->
-                <div class="well">
-                    <h4>Blog Categories</h4>
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-lg-6">
-                            <ul class="list-unstyled">
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                                <li><a href="#">Category Name</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div>
+              <!-- Event Categories Well -->
+              <div class="well">
+                  <h4>Event Categories</h4>
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <ul class="list-unstyled">
+                              <li><a href="#">Category Name</a>
+                              </li>
+                              <li><a href="#">Category Name</a>
+                              </li>
+                              <li><a href="#">Category Name</a>
+                              </li>
+                              <li><a href="#">Category Name</a>
+                              </li>
+                          </ul>
+                      </div>
+                      <div class="col-lg-6">
+                          <ul class="list-unstyled">
+                              <li><a href="#">Category Name</a>
+                              </li>
+                              <li><a href="#">Category Name</a>
+                              </li>
+                              <li><a href="#">Category Name</a>
+                              </li>
+                              <li><a href="#">Category Name</a>
+                              </li>
+                          </ul>
+                      </div>
+                  </div>
+                  <!-- /.row -->
+              </div>
 
-                <!-- Side Widget Well -->
-                <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-                </div>
+              <!-- Side Widget Well -->
+              <div class="well">
+                  <h4>Side Widget Well</h4>
+                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+              </div>
 
-            </div>
+          </div>
 
-        </div>
-        <!-- /.row -->
+      </div>
+    </div>

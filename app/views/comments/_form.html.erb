@@ -1,0 +1,9 @@
+	<%= form_for [@event, @comment] do |f| %>
+		<%= f.hidden_field :user_name, value: current_user.name %>
+    
+    <div class="form-group">
+      <%= f.text_area :body, class: "form-control", rows: "3" %>
+    </div>
+
+    <%= f.submit "Submit", class: "btn btn-primary", style: "margin-left: 43%;" %>
+  <% end %>

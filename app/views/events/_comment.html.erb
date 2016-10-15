@@ -1,0 +1,12 @@
+	<% @event.comments.each do |comment| %>
+
+		<a class="pull-left" href="#">
+	  	<img class="media-object" src="http://placehold.it/64x64" alt="">
+		</a>
+		<div class="media-body">
+	    <h4 class="media-heading"><%= comment.user_name %>
+	        <small><%= comment.created_at.to_formatted_s(:long_ordinal) %></small>
+	    </h4>
+	    <%= comment.body %>
+		</div><br><br>
+	<% end %>

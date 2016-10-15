@@ -17,10 +17,14 @@ Rails.application.routes.draw do
 		end
 	end
 	resources :events do
+
+		resources :comments
+
 		member do
 			get :attendees
 		end
 	end
+
 	resources :users, only: [:show]
 	resources :events
 	resources :attends, only: [:create, :destroy]
