@@ -23,7 +23,11 @@
               <p class="lead" style="text-align:center;"><i class="fa fa-calendar"></i> Event Date: <%= @event.date.to_formatted_s(:long_ordinal) %></p>
 
               <!-- Preview Image -->
-              <img class="img-responsive" src="http://placehold.it/900x300" alt=""><br>
+              <% if @event.picture? %>
+                <%= image_tag @event.picture.url, class: "img-responsive", style: "height: 350px; margin-left: auto; margin-right: auto;", alt: @event.picture %>
+              <% else %>
+                <%= image_tag "event-show-default.jpg", class: "img-responsive", alt: "default-image" %>
+              <% end %><br>
 
               <!-- Post Content -->
               <p class="lead">Event Description: <%= @event.description %></p><br>
@@ -91,7 +95,7 @@
                       <input type="text" class="form-control">
                       <span class="input-group-btn">
                           <button class="btn btn-default" type="button">
-                              <span class="glyphicon glyphicon-search"></span>
+                              <!-- <span class="glyphicon glyphicon-search"></span> -->
                       </button>
                       </span>
                   </div>
