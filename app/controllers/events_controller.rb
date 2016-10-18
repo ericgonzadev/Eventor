@@ -1,32 +1,36 @@
 class EventsController < ApplicationController
-	before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
+  before_action :logged_in_user, only: [:new, :create, :edit, :update, :destroy]
 
-	def index
-		@upcoming_events = Event.upcoming
+  def index
+    @upcoming_events = Event.upcoming
     @past_events =  Event.past
-	end
+  end
 
   def new
-  	@event = Event.new
+    @event = Event.new
   end
 
   def create
-  	@event = current_user.events.build(event_params)
+    @event = current_user.events.build(event_params)
     valid_date = @event.is_valid_date
 
-  	if @event.save && valid_date
+    if @event.save && valid_date
       current_user.attend(@event)
-  		redirect_to @event
-  	else
-  		flash.now[:danger] = "Event date must be 1 or more days prior to now" if !valid_date
+      redirect_to @event
+    else
+      flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !valid_date
       render :new
-  	end
+    end
   end
 
   def show
-  	@event = Event.find(params[:id])
+    @event = Event.find(params[:id])
     @comment = Comment.new
     @comment.event_id = @event.id
+    @hash = Gmaps4rails.build_markers(@event) do |event, marker|
+      marker.lat event.latitude
+      marker.lng event.longitude
+    end
   end
 
   def edit
@@ -42,7 +46,7 @@ class EventsController < ApplicationController
     if @event.update(event_params) && valid_date
       redirect_to @event
     else
-      flash.now[:danger] = "Event date must be 1 or more days prior to now" if !valid_date
+      flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !valid_date
       render :edit
     end
   end
@@ -61,7 +65,7 @@ class EventsController < ApplicationController
 
 private
 
-	def event_params
-		params.require(:event).permit(:title, :description, :date, :picture)
-	end
+  def event_params
+    params.require(:event).permit(:title, :description, :date, :picture, :address, :latitude, :longitude)
+  end
 end

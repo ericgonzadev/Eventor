@@ -1,146 +1,154 @@
-  <title><%= @event.title %></title>  
+  <% content_for :head do %>
+    <title><%= @event.title %></title>
+  <% end %>  
 
-  <!-- Page Content -->
+
+  <!-- Event Content -->
   <div class="container">
+    <div class="row">
+      <div class="col-lg-8">
 
-      <div class="row">
+        <!-- Title -->
+        <h1 style="text-align:center;"><%= @event.title %></h1>
+        <hr>
 
-          <!-- Event Post Content Column -->
-          <div class="col-lg-8">
+        <!-- Author -->
+        <p class="lead" style="text-align:center;">
+            Created by: <%= link_to @event.user.name, @event.user %>
+        </p>
 
-              <!-- Event Post -->
+        <!-- Date/Time -->
+        <p class="lead" style="text-align:center;"><i class="fa fa-calendar"></i> Event Date: <%= @event.date.to_formatted_s(:long_ordinal) %></p>
 
-              <!-- Title -->
-              <h1 style="text-align:center;"><%= @event.title %></h1>
-              <hr>
+        <!-- Preview Image -->
+        <% if @event.picture? %>
+          <%= image_tag @event.picture.url, class: "img-responsive", style: "height: 350px; margin-left: auto; margin-right: auto;", alt: @event.picture %>
+        <% else %>
+          <%= image_tag "event-show-default.jpg", class: "img-responsive", alt: "default-image" %>
+        <% end %><br>
 
-              <!-- Author -->
-              <p class="lead" style="text-align:center;">
-                  Created by: <%= link_to @event.user.name, @event.user %>
-              </p>
+        <!-- Description -->
+        <p class="lead">Event Description: <%= @event.description %></p><br>
 
-              <!-- Date/Time -->
-              <p class="lead" style="text-align:center;"><i class="fa fa-calendar"></i> Event Date: <%= @event.date.to_formatted_s(:long_ordinal) %></p>
-
-              <!-- Preview Image -->
-              <% if @event.picture? %>
-                <%= image_tag @event.picture.url, class: "img-responsive", style: "height: 350px; margin-left: auto; margin-right: auto;", alt: @event.picture %>
+        <!-- Attend Buttons -->
+        <% if current_user && @event.date > Time.now%>
+        
+        <% unless current_user.id == @event.user_id %>
+            <div id="attend_form" >
+              <% if current_user.attending?(@event) %>
+                <%= render "unattend" %>
               <% else %>
-                <%= image_tag "event-show-default.jpg", class: "img-responsive", alt: "default-image" %>
-              <% end %><br>
-
-              <!-- Post Content -->
-              <p class="lead">Event Description: <%= @event.description %></p><br>
-
-              <% if current_user && @event.date > Time.now%>
-      				  <% unless current_user.id == @event.user_id %>
-      				  	<div id="attend_form" >
-        					  <% if current_user.attending?(@event) %>
-        					  	<%= render "unattend" %>
-        					  <% else %>
-        					  	<%= render "attend" %>
-        					  <% end %>
-      						</div>
-      					<% else %>	
-      					  <p class="lead" style="text-align:center;"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", style: "margin-right: 20px;" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
-      					<% end %>
-      				<% end %><br>
-
-              <% if !current_user %>  
-                <h4 class="lead" style="text-align:center; color: red;">(Please log in or sign up to attend and comment on this event)</h4>
-              <% end %><br>
-
-      			  <p class="lead" style="text-align:center;">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
-      			  <hr>
-      			  <div id="users_attending" style="margin-bottom: 20px;">
-      			  	<% if @event.attendees.any? %>
-      				  	<% @event.attendees.each do |user| %>
-      						  <li style="text-align:center; list-style: none; font-size: 16px;">Name: <%= link_to user.name, user %></li>
-        					<% end %>
-        				<% end %>
-      			  </div>
-
-              <hr id="separator">
-
-              <!-- Event Comments -->
-              <h3 style="text-align:center;">Comments (<%= @event.comments.count %>)</h3>
-              <hr>
-
-              <% if @event.comments.any? %>
-                <div class="media" ">
-                  <%= render 'comment', collection: @event.comments %>
-                </div>
-              <% else %>
-                <div class="media" style="margin-bottom: 20px;">
-                  <h4 style="text-align: center;">No comments</h4>
-                </div>
-              <% end %>
-
-
-              <% if current_user %>
-                <div class="well">
-                    <h4>Leave a Comment:</h4>
-                    <%= render 'comments/form' %>
-                  </div>
+                <%= render "attend" %>
               <% end %>
             </div>
+          <% else %>  
+            <p class="lead" style="text-align:center;"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", style: "margin-right: 20px;" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+          <% end %>
+        <% end %><br>
+        <% if !current_user %>  
+          <h4 class="lead" style="text-align:center; color: red;">(Please log in or sign up to attend and comment on this event)</h4>
+        <% end %><br>
 
-          <!-- Event Sidebar Widgets Column -->
-          <div class="col-md-4">
+        <!-- Attendees -->
+        <p class="lead" style="text-align:center;">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
+        <hr>
+        <div id="users_attending" style="margin-bottom: 20px;">
+          <% if @event.attendees.any? %>
+            <% @event.attendees.each do |user| %>
+              <li style="text-align:center; list-style: none; font-size: 16px;">Name: <%= link_to user.name, user %></li>
+            <% end %>
+          <% end %>
+        </div>
 
-              <!-- Event Search Well -->
-              <div class="well">
-                  <h4>Event Search</h4>
-                  <div class="input-group">
-                      <input type="text" class="form-control">
-                      <span class="input-group-btn">
-                          <button class="btn btn-default" type="button">
-                              <!-- <span class="glyphicon glyphicon-search"></span> -->
-                      </button>
-                      </span>
-                  </div>
-                  <!-- /.input-group -->
-              </div>
+        <hr id="separator">
 
-              <!-- Event Categories Well -->
-              <div class="well">
-                  <h4>Event Categories</h4>
-                  <div class="row">
-                      <div class="col-lg-6">
-                          <ul class="list-unstyled">
-                              <li><a href="#">Category Name</a>
-                              </li>
-                              <li><a href="#">Category Name</a>
-                              </li>
-                              <li><a href="#">Category Name</a>
-                              </li>
-                              <li><a href="#">Category Name</a>
-                              </li>
-                          </ul>
-                      </div>
-                      <div class="col-lg-6">
-                          <ul class="list-unstyled">
-                              <li><a href="#">Category Name</a>
-                              </li>
-                              <li><a href="#">Category Name</a>
-                              </li>
-                              <li><a href="#">Category Name</a>
-                              </li>
-                              <li><a href="#">Category Name</a>
-                              </li>
-                          </ul>
-                      </div>
-                  </div>
-                  <!-- /.row -->
-              </div>
+        <!-- Comments -->
+        <h3 style="text-align:center;">Comments (<%= @event.comments.count %>)</h3>
+        <hr>
 
-              <!-- Side Widget Well -->
-              <div class="well">
-                  <h4>Side Widget Well</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
-              </div>
-
+        <% if @event.comments.any? %>
+          <div class="media" ">
+            <%= render 'comment', collection: @event.comments %>
           </div>
+        <% else %>
+          <div class="media" style="margin-bottom: 20px;">
+            <h4 style="text-align: center;">No comments</h4>
+          </div>
+        <% end %>
 
+
+        <% if current_user %>
+          <div class="well">
+              <h4>Leave a Comment:</h4>
+              <%= render 'comments/form' %>
+            </div>
+        <% end %>
+      </div>
+
+      <!-- Event Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <!-- Map -->
+        <div class="well" style='width: 450px;'>
+          <p class="lead">
+            Location: <%= @event.address %>
+          </p>
+          <div id="map" style='width: 400px; height: 400px;'></div>
+        </div>
+
+        <!-- Event Search Well -->
+        <!-- <div class="well">
+          <h4>Event Search</h4>
+          <div class="input-group">
+            <input type="text" class="form-control">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
+        </div> -->
+
+        <!-- Event Categories Well -->
+        <!-- <div class="well" style='width: 450px;'>
+          <h4>Event Categories</h4>
+          <div class="row">
+            <div class="col-lg-6">
+              <ul class="list-unstyled">
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+              </ul>
+            </div>
+            <div class="col-lg-6">
+              <ul class="list-unstyled">
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+                <li><a href="#">Category Name</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
       </div>
     </div>
+  </div>
+
+  <script type="text/javascript">
+    handler = Gmaps.build('Google');
+    handler.buildMap({ provider: {}, internal: {id: 'map'}}, function(){
+      markers = handler.addMarkers(<%=raw @hash.to_json %>);
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      handler.getMap().setZoom(17);
+    });
+  </script>
