@@ -30,6 +30,14 @@
 
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
+				<%= f.label :category, "Category*" %><br>
+				<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] } %>
+				<p class="help-block"></p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-lg-6 col-lg-offset-3">
 				<%= f.label :date, "Date*" %><br>
 				<%= f.datetime_select :date, options = {ampm: true, minute_step: 15, start_year: Date.today.year, end_year: Date.today.year + 5, order: [:month, :day, :year], default: Time.now} %>
 				<p class="help-block"></p>

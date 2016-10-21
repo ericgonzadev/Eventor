@@ -10,6 +10,9 @@
 
         <!-- Title -->
         <h1 style="text-align:center;"><%= @event.title %></h1>
+        <h5  style="text-align:center;">
+            Category: <%= @category %>
+        </h5>
         <hr>
 
         <!-- Author -->
@@ -149,6 +152,6 @@
       markers = handler.addMarkers(<%=raw @hash.to_json %>);
       handler.bounds.extendWith(markers);
       handler.fitMapToBounds();
-      handler.getMap().setZoom(17);
+      handler.getMap().setZoom(15);
     });
   </script>

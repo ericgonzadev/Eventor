@@ -16,10 +16,9 @@ Rails.application.routes.draw do
 			get :attending
 		end
 	end
+
 	resources :events do
-
 		resources :comments
-
 		member do
 			get :attendees
 		end

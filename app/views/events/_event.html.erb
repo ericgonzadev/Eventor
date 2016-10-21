@@ -12,9 +12,9 @@
       </div>
       <div class="ratings">
       	<% if event.date > Time.now %>
-				  <p><%= event.attendees.count %> people attending</p>
+				  <p><%= pluralize(event.attendees.count, 'person') %> attending</p>
 			  <% else %>
-				  	<p><%= event.attendees.count%> people attended</p>
+				  	<p><%= pluralize(event.attendees.count, 'person') %> attended</p>
 			  <% end %>
       </div>
     </div>

@@ -1,39 +1,48 @@
-	<title>All Events</title>
+ <title>All Events</title>
 
-	<!-- Custom CSS -->
-	<%= stylesheet_link_tag 'events-index' %>
+ <!-- Custom CSS -->
+ <%= stylesheet_link_tag 'events-index' %>
 
-	<!-- Page Content -->
-	<div class="container">
-			<div class="row">
-					<div class="col-md-3">
-							<p class="lead">Jump to a category</p>
-							<div class="list-group">
-									<a href="#upcoming" class="list-group-item">Upcoming Events</a>
-									<a href="#past" class="list-group-item">Past Events</a>
-									<% if current_user %>
-										<a href=<%= "users/#{current_user.id}" %> class="list-group-item">Your Events</a>
-									<% end %>
-							</div>
-					</div>
+ <!-- Page Content -->
+ <div class="container">
+   <div class="row">
+     <div class="col-md-3 text-center" style="padding-top: 10px;">
+        <h4><b>Search by</b></h4>
+        <%= form_tag events_path, method: :get do %>
 
-					<div class="col-md-9">
-						<div class="row">
-							<h3 id="upcoming" style="text-align: center;">Upcoming Events (<%= @upcoming_events.count %>)</h3>
-							<hr>
-							<% if @upcoming_events.any? %>
-								<%= render @upcoming_events %>
-							<% end %>
-						</div>
-						
-						<div class="row">
-							<h3 id="past" style="text-align: center;">Past Events (<%= @past_events.count %>)</h3>
-							<hr>
-							<% if @past_events.any? %>
-								<%= render @past_events %>
-							<% end %>            
-						</div>
-					</div>
-			</div>
-	</div>
-	<!-- /.container -->
+          <%= label_tag :search, "Name / Description: " %>
+          <%= text_field_tag :search, params[:search], placeholder: "Party, Soccer, Concert, etc.", class: "form-control" %>
+          <p class="help-block"></p>
+
+          <%= label_tag :location, "Location, Zip Code, City, State:" %>
+          <%= text_field_tag :location, params[:location], placeholder: "San Francisco, 90011, etc.", class: "form-control" %>
+          <p class="help-block"></p>
+
+          <%= label_tag :category, "Category: " %><br>
+          <%= select_tag :category, options_for_select([["All", "0"], ["Arts", "1"], ["Business", "2"], ["Charity", "3"], ["Education", "4"], ["Fashion", "5"], ["Film & Media", "6"], ["Food & Drink", "7"], ["Health", "8"], ["Hobbies", "9"], ["Holiday", "10"], ["Music", "11"], ["Science & Tech", "12"], ["Spirituality", "13"], ["Sports & Fitness", "14"], ["Travel & Outdoor", "15"], ["Other", "16"]]), class: "form-control" %>
+          <p class="help-block"></p>
+
+          <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
+          <p class="help-block"></p><br>
+
+         <h4><b>Filter by Timeline</b></h4>
+         <div class="list-group">
+            <%= submit_tag "Upcoming Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>
+            <%= submit_tag "Past Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>      
+          </div>
+
+         <% end %>
+     </div>
+
+     <div class="col-md-9">
+      <div class="row">
+       <h3 id="events" style="text-align: center;"><%= params[:timeline] == "Past Events" ? "Past Events ( #{@events.length} )" : "Upcoming Events ( #{@events.length} )" %></h3>
+       <hr>
+       <% if @events.any? %>
+        <%= render @events %>
+       <% end %>
+      </div>
+     </div>
+   </div>
+ </div>
+ <!-- /.container -->

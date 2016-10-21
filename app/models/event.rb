@@ -9,9 +9,10 @@ class Event < ActiveRecord::Base
 	validates :title, presence: true, length: {maximum: 40}
 	validates :description, presence: true, length: {maximum: 80}
 	validates :address, presence: true
+	validates :category_id, presence: true
 	validate  :picture_size
 	geocoded_by :address
-	after_validation :geocode
+	after_validation :geocode, :if => :address_changed?
 
 	def Event.upcoming
 		Event.all.where("date > ?", Time.now)
@@ -21,8 +22,15 @@ class Event < ActiveRecord::Base
 		Event.all.where("date < ?", Time.now)
 	end
 
-	def is_valid_date
+	def has_valid_date?
 		self.date < Time.now.advance(days: 1) ? false : true
+	end
+
+	def Event.search(params)
+		params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i ) : events = Event.all
+		events = events.where("title LIKE ? or description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
+		events = events.near(params[:location], 30) if params[:location].present?
+		params[:timeline] == "Past Events" ? events.past : events.upcoming
 	end
 
 private
