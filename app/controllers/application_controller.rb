@@ -23,8 +23,10 @@ private
 
   #Verifies user is owner of resource
   def authorized?(resource)
-    unless current_user.id == resource.user_id
-      redirect_to root_path
+    if resource.class == Event
+      redirect_to root_path unless current_user && current_user.id == resource.user_id
+    elsif resource.class == User
+      redirect_to root_path unless current_user && current_user.id == resource.id
     end
   end
 end

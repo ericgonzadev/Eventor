@@ -2,11 +2,11 @@ class User < ActiveRecord::Base
 	has_many :events, dependent: :destroy
 	has_many :active_attends, class_name: "Attend", foreign_key: "attendee_id", dependent: :destroy
 	has_many :attending, through: :active_attends, source: :attended_event
-	before_validation :normalize_name
+	before_save :normalize_name
 	before_save :downcase_email
 	validates :name, presence: true, length: {maximum: 50}
 	validates :email, presence: true, length: {maximum: 50}, uniqueness: { case_sensitive: false }
-	validates :password, length: {minimum: 4}
+	validates :password, length: {minimum: 4}, allow_blank: true, on: :update
 	has_secure_password
 
 	#Adds user to attend list for event

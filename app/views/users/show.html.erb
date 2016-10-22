@@ -1,66 +1,58 @@
-  <% if current_user && @user.id == current_user.id %>
-    <% @display_name = "Your" %>
-    <% @past = "" %> 
-  <% else %>
-    <% @display_name = "#{@user.name}'s" %>
-    <% @past = "is" %>
-  <% end %>
-
   <title><%= @display_name %> Profile</title>
 
-  <h1 style="text-align: center;"><%= @display_name %> Profile</h1>
-  <hr>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-9 col-md-offset-3 text-center">
+        <h1><%= @display_name  %> Profile</h1>
+        <hr>
+      </div>
+    </div>
+  </div>
 
   <!-- Page Content -->
   <div class="container">
       <div class="row">
-          <div class="col-md-3 text-center">
-              <p class="lead">Jump to a category</p>
+          <div class="col-md-3 text-center" style="padding-top: 10px;">
+            <h4><b>Account</b></h4>
+            <div class="list-group">
+              <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
+              <%= link_to "Logout", edit_user_path, class: "list-group-item" %>
+            </div>
+
+            <h4><b>Filter Events by Condition</b></h4>
               <div class="list-group">
-                  <a href="#upcoming" class="list-group-item"><%= @display_name %> Upcoming Events</a>
-                  <a href="#past" class="list-group-item"><%= @display_name %> Past Events</a>
-                  <a href="#attending" class="list-group-item">Events <%= @display_name %> <%= @past %> Attending</a>
+                <%= form_tag @user, method: :get do %>
+                  <%= submit_tag "#{@display_name} Upcoming Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>
+                  <%= submit_tag "#{@display_name} Past Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>    
+                  <% if @special %>
+                  <%= submit_tag "Events #{@special} Attending", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>    
+                  <% else %>
+                  <% @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s" %>
+                  <%= submit_tag "Events #{@display_name} Attending", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>  
+                  <%  @display_name = "#{@user.name}'s" %>
+                  <% end %>
+                <% end %>
               </div>
           </div>
 
           <div class="col-md-9 text-center">
               <div class="row">
-                <h3 id="upcoming" style="text-align: center;"><%= @display_name %> Upcoming Events (<%= @user.upcoming_events.count %>)</h3>
-                <hr>
-                <% if @user.upcoming_events.any? %>
-                  <%= render @upcoming_events %>
-                <% elsif current_user && @user.id == current_user.id %>
-                  <p>Events you create will show up here</p>
-                <% else %>
-                  <p>No upcoming events</p>
+                <h3><%= @title %></h3>
+                <div>(<%= page_entries_info(@events) %>)</div>
+                <%= will_paginate(@events) %><br>
+                <% if @events.any? %>
+                  <%= render @events %>
                 <% end %>
-              </div>
-
-              <div class="row">
-                <h3 id="past" style="text-align: center;"><%= @display_name %> Past Events (<%= @user.past_events.count %>)</h3>
-                <hr>
-                <% if @user.past_events.any? %>
-                  <%= render @past_events %>
-                <% elsif current_user && @user.id == current_user.id %>
-                  <p>Your past events will show up here</p>
-                <% else %>
-                  <p>No past events</p>
-                <% end %> 
-              </div>
-
-              <div class="row">
-                <h3 id="attending" style="text-align: center;">Events <%= @display_name %> <%= @past %> Attending (<%= @events_attending.count %>)</h3>
-                <hr>
-                <% if @events_attending.any? %>
-                  <%= render @events_attending %>
-                <% elsif current_user && @user.id == current_user.id %>
-                  <p>Events you select to attend will show up here</p>
-                <% else %>
-                  <p><%= @user.name %> is not attending any evetns yet</p>
-                <% end %>          
+                <%= will_paginate(@events) %>
               </div>
           </div>
       </div>
   </div>
-  <!-- /.container -->
+  
+  <style type="text/css">
+    .pagination{
+      margin-top: 5px; 
+      margin-bottom: 5px;
+    }
+  </style>
 

@@ -3,10 +3,9 @@ class EventsController < ApplicationController
 
   def index
     if params[:category]
-
-      @events =  Event.search(params)
+      @events =  Event.search(params).paginate(page: params[:page], per_page: 12)
     else
-      @events =  Event.upcoming
+      @events =  Event.upcoming.paginate(page: params[:page], per_page: 12)
     end
   end
 
@@ -16,9 +15,10 @@ class EventsController < ApplicationController
 
   def create
     @event = current_user.events.build(event_params)
-
+    @event.category_id = params[:category_id].to_i
     if @event.save && @event.has_valid_date?
       current_user.attend(@event)
+      flash[:success] = "Event Created"
       redirect_to @event
     else
       flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !@event.has_valid_date?
@@ -45,12 +45,12 @@ class EventsController < ApplicationController
   def update
     @event = Event.find(params[:id])
     authorized?(@event)
-    valid_date = Event.new(event_params).is_valid_date
-
-    if @event.update(event_params) && valid_date
+    @event.category_id = params[:category_id].to_i
+    if @event.update(event_params) && @event.has_valid_date?
+      flash[:success] = "Event Updated"
       redirect_to @event
     else
-      flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !valid_date
+      flash.now[:danger] = "Event date must be 1 or more days ahead from now" if !@event.has_valid_date?
       render :edit
     end
   end

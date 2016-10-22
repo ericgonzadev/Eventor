@@ -8,7 +8,8 @@
        <div class="caption">
         <h4><%= link_to "#{event.title}", event %></h4>  	            
         <p>Created by: <%= link_to event.user.name, event.user %><br>
-        Date: <%= event.date.to_formatted_s(:long_ordinal) %></p>
+        <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
+        <%= event.date.strftime("Time: %I : %M %p") %></p>
       </div>
       <div class="ratings">
       	<% if event.date > Time.now %>

@@ -18,3 +18,8 @@
 
 # Ignore uploaded test images.
 /public/uploads
+
+#Ignore byebug history
+.byebug_history
+/.byebug_history
+/byebug_history

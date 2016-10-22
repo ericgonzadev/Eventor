@@ -24,7 +24,7 @@ Rails.application.routes.draw do
 		end
 	end
 
-	resources :users, only: [:show]
+	resources :users, only: [:show, :edit]
 	resources :events
 	resources :attends, only: [:create, :destroy]
 end

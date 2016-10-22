@@ -30,8 +30,8 @@
 
 		<div class="row">
 			<div class="col-lg-6 col-lg-offset-3">
-				<%= f.label :category, "Category*" %><br>
-				<%= f.select :category_id, Category.all.map{ |c| [c.name, c.id] } %>
+				<%= f.label :category_id, "Category*" %><br>
+				<%= select_tag :category_id, options_for_select(Category.all.map{ |c| [c.name, c.id] }, @event.category_id ), class: "form-control" %>
 				<p class="help-block"></p>
 			</div>
 		</div>
