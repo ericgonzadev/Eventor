@@ -14,12 +14,16 @@ class Event < ActiveRecord::Base
 	geocoded_by :address
 	after_validation :geocode, :if => :address_changed?
 
-	def Event.upcoming
+	def Event.upcoming()
 		Event.all.where("date > ?", Time.now)
 	end
 
 	def Event.past
 		Event.all.where("date < ?", Time.now)
+	end
+
+	def Event.featured(visitor_latitude, visitor_longitude)
+		Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)
 	end
 
 	def has_valid_date?

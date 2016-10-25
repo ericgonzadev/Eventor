@@ -1,15 +1,11 @@
-  <title>All Events</title>
-
-  <!-- Custom CSS -->
-  <%= stylesheet_link_tag 'events-index' %>
+  <% provide(:title, "All Events") %> 
 
   <!-- Page Content -->
   <div class="container">
     <div class="row">
-      <div class="col-md-3 text-center" style="padding-top: 10px;">
+      <div class="col-md-3 text-center" id="search-sidebar">
         <h4><b>Search by</b></h4>
         <%= form_tag events_path, method: :get do %>
-
           <%= label_tag :search, "Name / Description: " %>
           <%= text_field_tag :search, params[:search], placeholder: "Party, Soccer, Concert, etc.", class: "form-control" %>
           <p class="help-block"></p>
@@ -31,6 +27,7 @@
             <%= submit_tag "Past Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>      
           </div>
         <% end %>
+
       </div>
 
       <div class="col-md-9 text-center">
@@ -47,10 +44,3 @@
       </div>
     </div>
   </div>
-
-  <style type="text/css">
-    .pagination{
-      margin-top: 0px; 
-      margin-bottom: 5px;
-    }
-  </style>

@@ -10,13 +10,5 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 
-Rails.application.config.assets.precompile += %w( pages.css )
-Rails.application.config.assets.precompile += %w( pages.js )
-Rails.application.config.assets.precompile += %w( magnific-popup.css )
-Rails.application.config.assets.precompile += %w( bootstrap.min.css )
-Rails.application.config.assets.precompile += %w( jquery.min.js )
-Rails.application.config.assets.precompile += %w( bootstrap.min.js )
-Rails.application.config.assets.precompile += %w( scrollreveal.min.js )
-Rails.application.config.assets.precompile += %w( jquery.magnific-popup.min.js )
-Rails.application.config.assets.precompile += %w( events-index.css )
 Rails.application.config.assets.precompile += %w( google-places.js )
+Rails.application.config.assets.precompile += %w( header-new.jpg )

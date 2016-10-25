@@ -34,7 +34,7 @@ class UsersController < ApplicationController
     else
       @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s"
       @special ? @title = "Events #{@special} Attending" : @title = "Events #{@display_name} Attending"
-      @events = @user.attending.paginate(page: params[:page], per_page: 12)
+      @events = @user.attending.where("date > ?", Time.now).paginate(page: params[:page], per_page: 12)
       @display_name = "#{@user.name}'s" if @display_name == "#{@user.name} is"
     end
   end

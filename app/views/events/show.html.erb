@@ -1,42 +1,23 @@
-  <% content_for :head do %>
-    <title><%= @event.title %></title>
-  <% end %>  
+  <% provide(:title, @event.title) %> 
 
-
-  <!-- Event Content -->
+  <!-- Page Content -->
   <div class="container">
     <div class="row">
       <div class="col-lg-8">
-
-        <!-- Title -->
-        <h1 style="text-align:center;"><%= @event.title %></h1>
-        <h5  style="text-align:center;">
-            Category: <%= @category %>
-        </h5>
+        <!-- Event Content -->
+        <h1 id="center"><%= @event.title %></h1>
+        <h5 id="center">Category: <%= @category %></h5>
         <hr>
-
-        <!-- Author -->
-        <p class="lead" style="text-align:center;">
-            Created by: <%= link_to @event.user.name, @event.user %>
-        </p>
-
-        <!-- Date/Time -->
-        <p class="lead" style="text-align:center;"><b>Time:</b> <%= @event.date.strftime("%I : %M %p") %><br><i class="fa fa-calendar"></i><b>Event Date: </b><%= @event.date.strftime("%A, %B %d %Y") %></p>
-
-        <!-- Preview Image -->
+        <p class="lead" id="center">Created by: <%= link_to @event.user.name, @event.user %></p>
+        <p class="lead" id="center"><b>Time:</b> <%= @event.date.strftime("%I : %M %p") %><br><i class="fa fa-calendar"></i><b>Event Date: </b><%= @event.date.strftime("%A, %B %d %Y") %></p>
         <% if @event.picture? %>
-          <%= image_tag @event.picture.url, class: "img-responsive", style: "height: 350px; margin-left: auto; margin-right: auto;", alt: @event.picture %>
+          <%= image_tag @event.picture.url, class: "img-responsive", id: "event-show-image", alt: @event.picture %>
         <% else %>
           <%= image_tag "event-show-default.jpg", class: "img-responsive", alt: "default-image" %>
         <% end %><br>
-
-        <!-- Description -->
         <p class="lead">Event Description: <%= @event.description %></p><br>
-
-        <!-- Attend Buttons -->
         <% if current_user && @event.date > Time.now%>
-        
-        <% unless current_user.id == @event.user_id %>
+          <% unless current_user.id == @event.user_id %>
             <div id="attend_form" >
               <% if current_user.attending?(@event) %>
                 <%= render "unattend" %>
@@ -45,62 +26,47 @@
               <% end %>
             </div>
           <% else %>  
-            <p class="lead" style="text-align:center;"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", style: "margin-right: 20px;" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+            <p class="lead" id="center"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
           <% end %>
         <% end %><br>
         <% if !current_user %>  
-          <h4 class="lead" style="text-align:center; color: red;">(Please log in or sign up to attend and comment on this event)</h4>
+          <h4 class="lead" id="center">(Please <%= link_to "Log In", login_path %> or  <%= link_to "Sign Up", signup_path %> to attend and comment on this event)</h4>
         <% end %><br>
 
         <!-- Attendees -->
-        <p class="lead" style="text-align:center;">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
+        <p class="lead" id="center">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
         <hr>
-        <div id="users_attending" style="margin-bottom: 20px;">
-          <% if @event.attendees.any? %>
-            <% @event.attendees.each do |user| %>
-              <li style="text-align:center; list-style: none; font-size: 16px;">Name: <%= link_to user.name, user %></li>
-            <% end %>
+        <div id="users_attending" >
+          <% @event.attendees.each do |user| %>
+            <li style="text-align:center; list-style: none; font-size: 16px;">Name: <%= link_to user.name, user %></li>
           <% end %>
         </div>
-
         <hr id="separator">
 
         <!-- Comments -->
-        <h3 style="text-align:center;">Comments (<%= @event.comments.count %>)</h3>
+        <h3 id="center">Comments (<%= @event.comments.count %>)</h3>
         <hr>
-
         <% if @event.comments.any? %>
           <div class="media" ">
             <%= render 'comment', collection: @event.comments %>
           </div>
-        <% else %>
-          <div class="media" style="margin-bottom: 20px;">
-            <h4 style="text-align: center;">No comments</h4>
-          </div>
         <% end %>
-
-
         <% if current_user %>
           <div class="well">
-              <h4>Leave a Comment:</h4>
-              <%= render 'comments/form' %>
-            </div>
+            <h4>Leave a Comment:</h4>
+            <%= render 'comments/form' %>
+          </div>
         <% end %>
       </div>
 
-      <!-- Event Sidebar Widgets Column -->
+      <!-- Event Sidebar -->
       <div class="col-md-4">
-
         <!-- Map -->
-        <div class="well" style='width: 450px;'>
-          <p class="lead">
-            Location: <%= @event.address %>
-          </p>
-          <div id="map" style='width: 400px; height: 400px;'></div>
+        <div class="well" id="event-sidebar">
+          <p class="lead"><b>Location:</b> <%= @event.address %></p>
+          <div id="map"></div>
         </div>
-
-        <!-- Event Search Well -->
-        <!-- <div class="well">
+        <!-- <div class="well" id="event-sidebar">
           <h4>Event Search</h4>
           <div class="input-group">
             <input type="text" class="form-control">
@@ -113,7 +79,7 @@
         </div> -->
 
         <!-- Event Categories Well -->
-        <!-- <div class="well" style='width: 450px;'>
+        <!-- <div class="well" id="event-sidebar">
           <h4>Event Categories</h4>
           <div class="row">
             <div class="col-lg-6">

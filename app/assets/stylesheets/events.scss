@@ -1,3 +1,70 @@
-// Place all the styles related to the Events controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  padding-top: 70px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.caption {
+    height: 130px;
+    overflow: hidden;
+}
+
+.caption h4 {
+    white-space: nowrap;
+}
+
+.thumbnail img {
+    width: 100%;
+}
+
+.thumbnail {
+    padding: 0;
+}
+
+.thumbnail .caption-full {
+    padding: 9px;
+    color: #333;
+}
+
+#search-sidebar{
+	padding-top: 12px;
+}
+
+.pagination{
+  margin-top: 0px; 
+  margin-bottom: 5px;
+}
+
+#event-thumbnail{
+  height: 180px; 
+  width: 350px;
+}
+
+#timeline{
+  width: 100%;
+}
+
+#center{
+  text-align:center;
+}
+
+#event-show-image{
+  height: 350px; 
+  margin-left: auto; 
+  margin-right: auto;
+}
+
+#show-edit-button{
+  margin-right: 20px;
+}
+
+#map{
+  width: 400px; 
+  height: 400px;
+}
+
+#event-sidebar{
+  width: 450px;
+}
+
+#comment-button{
+  margin-left: 43%;
+}

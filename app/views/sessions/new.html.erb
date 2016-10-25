@@ -1,5 +1,6 @@
-	<title>Eventor | Log In</title>
+  <% provide(:title, "Log In") %>
 
+  <!-- Page Content -->
   <div class="container text-center">
     <div class="row">
       <h3>Log In</h3>
@@ -9,14 +10,14 @@
       <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
           <%= f.label :email %><br>
-  				<%= f.email_field :email, class: "form-control" %><br>
+          <%= f.email_field :email, class: "form-control" %><br>
         </div>
       </div>  
 
       <div class="row">
         <div class="col-lg-4 col-lg-offset-4">
           <%= f.label :password %><br>
-  				<%= f.password_field :password, class: "form-control" %><br>
+          <%= f.password_field :password, class: "form-control" %><br>
         </div>
       </div>
 

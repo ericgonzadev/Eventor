@@ -1,22 +1,23 @@
-	<div class="col-sm-4 col-lg-4 col-md-4">
-    <a href=<%= "/events/#{event.id}" %>><div class="thumbnail">
-    	<% if event.picture? %>
-        <%= image_tag event.picture.url, class: "img-responsive", style: "height: 180px; width: 350px;", alt: event.picture %>
-      <% else %>
-      	<%= image_tag "event-index-default.jpg", alt: "default-image", style: "height: 180px; width: 350px;" %>
-      <% end %>
-       <div class="caption">
-        <h4><%= link_to "#{event.title}", event %></h4>  	            
-        <p>Created by: <%= link_to event.user.name, event.user %><br>
-        <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
-        <%= event.date.strftime("Time: %I : %M %p") %></p>
-      </div>
-      <div class="ratings">
-      	<% if event.date > Time.now %>
-				  <p><%= pluralize(event.attendees.count, 'person') %> attending</p>
-			  <% else %>
-				  	<p><%= pluralize(event.attendees.count, 'person') %> attended</p>
-			  <% end %>
-      </div>
-    </div>
-	</div>
+<div class="col-sm-4 col-lg-4 col-md-4">
+            <a href=<%= "/events/#{event.id}" %>>
+            <div class="thumbnail">
+              <% if event.picture? %>
+                <%= image_tag event.picture.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
+              <% else %>
+                <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
+              <% end %>
+              <div class="caption">
+                <h4><%= link_to "#{event.title}", event %></h4>
+                <p>Created by: <%= link_to event.user.name, event.user %><br>
+                <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
+                <%= event.date.strftime("Time: %I : %M %p") %></p>
+              </div>
+              <div class="ratings">
+                <% if event.date > Time.now %>
+                  <p><%= pluralize(event.attendees.count, 'person') %> attending</p>
+                <% else %>
+                    <p><%= pluralize(event.attendees.count, 'person') %> attended</p>
+                <% end %>
+              </div>
+            </div>
+          </div>

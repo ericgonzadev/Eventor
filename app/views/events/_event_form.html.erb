@@ -1,61 +1,61 @@
-	<% content_for :head do %>
-		<%= javascript_include_tag 'google-places.js' %>
-	<% end %>
+  <% content_for :head do %>
+  <%= javascript_include_tag 'google-places.js' %>
+  <% end %>
 
-	<%= form_for(@event, url: url, html: { multipart: true }) do |f| %> 
-		<%= render "shared/error_messages", object: f.object %>
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<%= f.label :title, "Title*"%>
-				<%= f.text_field :title, class: "form-control" %>
-				<p class="help-block"></p>
-			</div> 
-		</div> 
+    <%= form_for(@event, url: url, html: { multipart: true }) do |f| %> 
+      <%= render "shared/error_messages", object: f.object %>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :title, "Title*"%>
+          <%= f.text_field :title, class: "form-control" %>
+          <p class="help-block"></p>
+        </div> 
+      </div> 
 
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<%= f.label :description, "Description*" %>
-				<%= f.text_area :description, style: "resize: none;", rows: "10", class: "form-control" %>
-				<p class="help-block"></p>
-			</div>
-		</div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :description, "Description*" %>
+          <%= f.text_area :description, style: "resize: none;", rows: "10", class: "form-control" %>
+          <p class="help-block"></p>
+        </div>
+      </div>
 
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<%= f.label :address, "Address / Location*" %>
-				<%= f.text_field :address, class: "form-control", id: "txtautocomplete" %>
-				<p class="help-block"></p>
-			</div> 
-		</div> 
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :address, "Address / Location*" %>
+          <%= f.text_field :address, class: "form-control", id: "txtautocomplete" %>
+          <p class="help-block"></p>
+        </div> 
+      </div> 
 
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<%= f.label :category_id, "Category*" %><br>
-				<%= select_tag :category_id, options_for_select(Category.all.map{ |c| [c.name, c.id] }, @event.category_id ), class: "form-control" %>
-				<p class="help-block"></p>
-			</div>
-		</div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :category_id, "Category*" %><br>
+          <%= select_tag :category_id, options_for_select(Category.all.map{ |c| [c.name, c.id] }, @event.category_id ), class: "form-control" %>
+          <p class="help-block"></p>
+        </div>
+      </div>
 
-		<div class="row">
-			<div class="col-lg-6 col-lg-offset-3">
-				<%= f.label :date, "Date*" %><br>
-				<%= f.datetime_select :date, options = {ampm: true, minute_step: 15, start_year: Date.today.year, end_year: Date.today.year + 5, order: [:month, :day, :year], default: Time.now} %>
-				<p class="help-block"></p>
-			</div>
-		</div>
+      <div class="row">
+        <div class="col-lg-6 col-lg-offset-3">
+          <%= f.label :date, "Date*" %><br>
+          <%= f.datetime_select :date, options = {ampm: true, minute_step: 15, start_year: Date.today.year, end_year: Date.today.year + 5, order: [:month, :day, :year], default: Time.now} %>
+          <p class="help-block"></p>
+        </div>
+      </div>
 
-		<div class="row" style="margin-top: 20px;">
-			<div class="col-lg-6 col-lg-offset-3">
-				<% if @event.picture? %>
-          <label>Current Image:</label>
-          <%= image_tag @event.picture.url, class: "img-responsive", style: "height: 350px; margin-left: auto; margin-right: auto;", alt: @event.picture %><br>
-           <%= f.label :picture, "Upload different image (Image must be less than 5MB)" %>
-        <% else %>
-           <%= f.label :picture, "Optional: Upload an image (Must be less than 5MB)" %>
-        <% end %>
-				<%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "btn btn-primary", style: "margin-left: auto; margin-right: auto;" %>
-			</div>
-		</div>
+      <div class="row" style="margin-top: 20px;">
+        <div class="col-lg-6 col-lg-offset-3">
+          <% if @event.picture? %>
+            <label>Current Image:</label>
+            <%= image_tag @event.picture.url, class: "img-responsive", style: "height: 350px; margin-left: auto; margin-right: auto;", alt: @event.picture %><br>
+             <%= f.label :picture, "Upload different image (Image must be less than 5MB)" %>
+          <% else %>
+             <%= f.label :picture, "Optional: Upload an image (Must be less than 5MB)" %>
+          <% end %>
+          <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: "btn btn-primary", style: "margin-left: auto; margin-right: auto;" %>
+        </div>
+      </div>
 
-		<%= f.submit button, class: "btn btn-primary", style: "margin-top: 30px;" %>
-	<% end %>
+      <%= f.submit button, class: "btn btn-primary", style: "margin-top: 30px;" %>
+    <% end %>
