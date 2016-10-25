@@ -16,8 +16,10 @@
           <%= image_tag "event-show-default.jpg", class: "img-responsive", alt: "default-image" %>
         <% end %><br>
         <p class="lead">Event Description: <%= @event.description %></p><br>
-        <% if current_user && @event.date > Time.now%>
-          <% unless current_user.id == @event.user_id %>
+        <% if current_user%>
+          <% if current_user.id == @event.user_id %>
+            <p class="lead" id="center"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+          <% elsif @event.date > Time.now %>  
             <div id="attend_form" >
               <% if current_user.attending?(@event) %>
                 <%= render "unattend" %>
@@ -25,16 +27,19 @@
                 <%= render "attend" %>
               <% end %>
             </div>
-          <% else %>  
-            <p class="lead" id="center"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+          <% else %>
+            <p id="center">Event has ended</p>
           <% end %>
-        <% end %><br>
-        <% if !current_user %>  
+        <% else %>  
           <h4 class="lead" id="center">(Please <%= link_to "Log In", login_path %> or  <%= link_to "Sign Up", signup_path %> to attend and comment on this event)</h4>
         <% end %><br>
 
         <!-- Attendees -->
-        <p class="lead" id="center">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
+        <% if @event.date > Time.now %> 
+          <p class="lead" id="center">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
+        <% else %>
+          <p class="lead" id="center">People that attended this event (<span id="attendees"><%= @event.attendees.count %></span>)</p> 
+        <% end %>
         <hr>
         <div id="users_attending" >
           <% @event.attendees.each do |user| %>
