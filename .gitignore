@@ -23,3 +23,6 @@
 .byebug_history
 /.byebug_history
 /byebug_history
+
+#Ignore DS_store
+.DS_Store
