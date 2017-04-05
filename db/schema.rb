@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -18,11 +17,10 @@ ActiveRecord::Schema.define(version: 20161020214350) do
     t.integer  "attended_event_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.index ["attended_event_id"], name: "index_attends_on_attended_event_id"
+    t.index ["attendee_id", "attended_event_id"], name: "index_attends_on_attendee_id_and_attended_event_id", unique: true
+    t.index ["attendee_id"], name: "index_attends_on_attendee_id"
   end
-
-  add_index "attends", ["attended_event_id"], name: "index_attends_on_attended_event_id"
-  add_index "attends", ["attendee_id", "attended_event_id"], name: "index_attends_on_attendee_id_and_attended_event_id", unique: true
-  add_index "attends", ["attendee_id"], name: "index_attends_on_attendee_id"
 
   create_table "categories", force: :cascade do |t|
     t.string   "name"
@@ -36,9 +34,8 @@ ActiveRecord::Schema.define(version: 20161020214350) do
     t.integer  "event_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["event_id"], name: "index_comments_on_event_id"
   end
-
-  add_index "comments", ["event_id"], name: "index_comments_on_event_id"
 
   create_table "events", force: :cascade do |t|
     t.string   "title"
@@ -52,10 +49,9 @@ ActiveRecord::Schema.define(version: 20161020214350) do
     t.float    "longitude"
     t.string   "address"
     t.integer  "category_id"
+    t.index ["category_id"], name: "index_events_on_category_id"
+    t.index ["user_id"], name: "index_events_on_user_id"
   end
-
-  add_index "events", ["category_id"], name: "index_events_on_category_id"
-  add_index "events", ["user_id"], name: "index_events_on_user_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"
