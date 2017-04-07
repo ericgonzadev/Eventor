@@ -6,8 +6,8 @@ class Event < ActiveRecord::Base
 	has_many :attendees, through: :passive_attends, source: :attendee
 	has_many :comments
 	before_validation :normalize_title
-	validates :title, presence: true, length: {maximum: 40}
-	validates :description, presence: true, length: {maximum: 80}
+	validates :title, presence: true, length: {maximum: 100}
+	validates :description, presence: true, length: {maximum: 1000}
 	validates :address, presence: true
 	validates :category_id, presence: true
 	validate  :picture_size
