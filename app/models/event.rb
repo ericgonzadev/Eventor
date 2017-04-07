@@ -32,7 +32,7 @@ class Event < ActiveRecord::Base
 
 	def Event.search(params)
 		params[:category].to_i != 0 ? events = Event.where(category_id: params[:category].to_i ) : events = Event.all
-		events = events.where("title LIKE ? or description LIKE ?", "%#{params[:search]}%", "%#{params[:search]}%") if params[:search].present?
+		events = events.where("lower(title) LIKE ? or lower(description) LIKE ?", "%#{params[:search].downcase}%", "%#{params[:search.downcase].downcase}%") if params[:search].present?
 		events = events.near(params[:location], 30) if params[:location].present?
 		params[:timeline] == "Past Events" ? events.past : events.upcoming
 	end
