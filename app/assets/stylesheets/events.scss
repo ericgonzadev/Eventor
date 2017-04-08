@@ -3,12 +3,12 @@ body {
 }
 
 .caption {
-    height: 130px;
+    height: 165px;
     overflow: hidden;
 }
 
 .caption h4 {
-    white-space: nowrap;
+    white-space: pre-wrap;
 }
 
 .thumbnail img {
@@ -67,4 +67,12 @@ body {
 
 #required{
   color: red;
+}
+
+.wrap{
+  word-wrap: break-word;
+}
+
+.attendees{
+  color: #14b375;
 }

@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col-lg-8">
         <!-- Event Content -->
-        <h1 id="center"><%= @event.title %></h1>
+        <h1 id="center" class="wrap"><%= @event.title %></h1>
         <h5 id="center">Category: <%= @category %></h5>
         <hr>
         <p class="lead" id="center">Created by: <%= link_to @event.user.name, @event.user %></p>
@@ -15,7 +15,7 @@
         <% else %>
           <%= image_tag "event-show-default.jpg", class: "img-responsive", alt: "default-image" %>
         <% end %><br>
-        <p class="lead">Event Description: <%= @event.description %></p><br>
+        <p class="lead wrap">Event Description: <%= @event.description %></p><br>
         <% if current_user%>
           <% if current_user.id == @event.user_id %>
             <p class="lead" id="center"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>

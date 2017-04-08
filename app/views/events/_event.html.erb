@@ -7,12 +7,12 @@
                 <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
               <% end %>
               <div class="caption">
-                <h4><%= link_to "#{event.title}", event %></h4>
+                <h4 class="wrap"><%= link_to "#{event.title}", event %></h4>
                 <p>Created by: <%= link_to event.user.name, event.user %><br>
                 <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
                 <%= event.date.strftime("Time: %I : %M %p") %></p>
               </div>
-              <div class="ratings">
+              <div class="attendees">
                 <% if event.date > Time.now %>
                   <p><%= pluralize(event.attendees.count, 'person') %> attending</p>
                 <% else %>
