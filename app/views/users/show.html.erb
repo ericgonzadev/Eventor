@@ -13,12 +13,13 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 text-center" id="search-sidebar">
-        <h4><b>Account</b></h4>
-        <div class="list-group">
-          <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
-          <%= link_to "Logout",logout_path, method: "delete", class: "list-group-item" %>
-        </div>
-
+        <% if current_user.id == @user.id %>
+          <h4><b>Account</b></h4>
+          <div class="list-group">
+            <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
+            <%= link_to "Logout",logout_path, method: "delete", class: "list-group-item" %>
+          </div>
+        <% end %>
         <h4><b>Filter Events by Condition</b></h4>
         <div class="list-group">
           <%= form_tag @user, method: :get do %>
