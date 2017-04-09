@@ -33,7 +33,7 @@
       <div class="col-md-9 text-center">
         <div class="row">
           <h3 id="events"><%= params[:timeline] == "Past Events" ? "Past Events" : "Upcoming Events" %></h3>
-          <div>(<%= page_entries_info %>)</div>
+          <div>(<%= page_entries_info @events %>)</div>
           <hr>
           <%= will_paginate %><br>
           <% if @events.any? %>

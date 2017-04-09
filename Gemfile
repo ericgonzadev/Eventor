@@ -51,6 +51,9 @@ gem 'geocoder'
 #Google Maps
 gem 'gmaps4rails'
 
+#Ruby I18n
+gem 'i18n'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 

@@ -332,6 +332,7 @@ DEPENDENCIES
   font-awesome-sass
   geocoder
   gmaps4rails
+  i18n
   jbuilder (~> 2.0)
   jquery-rails
   mini_magick (= 4.5.1)
