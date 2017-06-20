@@ -1,5 +1,0 @@
-# Eventor
-
-START EXPLORING, CREATING, AND ATTENDING EVENTS NOW! (EventBrite Clone)
-
-https://railseventor.herokuapp.com/
