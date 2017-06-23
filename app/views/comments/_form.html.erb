@@ -1,7 +1,7 @@
-	<%= form_for [@event, @comment] do |f| %>
+	<%= form_for [@event, @comment], remote: true do |f| %>
 		<%= f.hidden_field :user_name, value: current_user.name %>
     <div class="form-group">
-      <%= f.text_area :body, class: "form-control", rows: "3" %>
+      <%= f.text_area :body, class: "form-control comment_text", rows: "3", required: true %>
     </div>
 
     <%= f.submit "Submit", class: "btn btn-primary", id: "comment-button" %>

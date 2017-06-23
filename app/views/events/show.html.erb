@@ -51,11 +51,9 @@
         <!-- Comments -->
         <h3 id="center">Comments (<%= @event.comments.count %>)</h3>
         <hr>
-        <% if @event.comments.any? %>
-          <div class="media" ">
-            <%= render 'comment', collection: @event.comments %>
-          </div>
-        <% end %>
+        <div class="media comment_list" ">
+          <%= render @comments %>
+        </div>
         <% if current_user %>
           <div class="well">
             <h4>Leave a Comment:</h4>

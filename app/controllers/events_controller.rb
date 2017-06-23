@@ -29,6 +29,7 @@ class EventsController < ApplicationController
   def show
     @event = Event.find(params[:id])
     @category = Category.find(@event.category_id).name
+    @comments = @event.comments
     @comment = Comment.new
     @comment.event_id = @event.id
     @hash = Gmaps4rails.build_markers(@event) do |event, marker|
