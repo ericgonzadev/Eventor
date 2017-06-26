@@ -1,4 +1,4 @@
 <%= form_for(current_user.active_attends.build, remote: true) do |f| %>
   <div><%= hidden_field_tag :attended_event_id, @event.id %></div>
-  <p class="lead" id="center"><%= f.submit "Attend Event", class: "btn btn-primary" %></p>
+  <p class="lead center"><%= f.submit "Attend Event", class: "btn btn-primary" %></p>
 <% end %>

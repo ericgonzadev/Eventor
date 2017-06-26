@@ -5,11 +5,11 @@
     <div class="row">
       <div class="col-lg-8">
         <!-- Event Content -->
-        <h1 id="center" class="wrap"><%= @event.title %></h1>
-        <h5 id="center">Category: <%= @category %></h5>
+        <h1 class="center" class="wrap"><%= @event.title %></h1>
+        <h5 class="center">Category: <%= @category %></h5>
         <hr>
-        <p class="lead" id="center">Created by: <%= link_to @event.user.name, @event.user %></p>
-        <p class="lead" id="center"><b>Time:</b> <%= @event.date.strftime("%I : %M %p") %><br><i class="fa fa-calendar"></i><b>Event Date: </b><%= @event.date.strftime("%A, %B %d %Y") %></p>
+        <p class="lead center">Created by: <%= link_to @event.user.name, @event.user %></p>
+        <p class="lead center"><b>Time:</b> <%= @event.date.strftime("%I : %M %p") %><br><i class="fa fa-calendar"></i><b> Event Date: </b><%= @event.date.strftime("%A, %B %d %Y") %></p>
         <% if @event.picture? %>
           <%= image_tag @event.picture.url, class: "img-responsive", id: "event-show-image", alt: @event.picture %>
         <% else %>
@@ -18,7 +18,7 @@
         <p class="lead wrap">Event Description: <%= @event.description %></p><br>
         <% if current_user%>
           <% if current_user.id == @event.user_id %>
-            <p class="lead" id="center"><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
+            <p class="lead center" ><%= link_to "Edit Event", edit_event_path(@event), class: "btn btn-primary", id: "show-edit-button" %><%= link_to "Delete Event", @event, method: :delete, data: { confirm: "You sure?" }, class: "btn btn-primary" %></p>
           <% elsif @event.date > Time.now %>  
             <div id="attend_form" >
               <% if current_user.attending?(@event) %>
@@ -28,17 +28,17 @@
               <% end %>
             </div>
           <% else %>
-            <p id="center">Event has ended</p>
+            <p class="center">Event has ended</p>
           <% end %>
         <% else %>  
-          <h4 class="lead" id="center">(Please <%= link_to "Log In", login_path %> or  <%= link_to "Sign Up", signup_path %> to attend and comment on this event)</h4>
+          <h4 class="lead center" >(Please <%= link_to "Log In", login_path %> or  <%= link_to "Sign Up", signup_path %> to attend and comment on this event)</h4>
         <% end %><br>
 
         <!-- Attendees -->
         <% if @event.date > Time.now %> 
-          <p class="lead" id="center">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
+          <p class="lead center">People attending this event (<span id="attendees"><%= @event.attendees.count %></span>)</p>
         <% else %>
-          <p class="lead" id="center">People that attended this event (<span id="attendees"><%= @event.attendees.count %></span>)</p> 
+          <p class="lead center" >People that attended this event (<span id="attendees"><%= @event.attendees.count %></span>)</p> 
         <% end %>
         <hr>
         <div id="users_attending" >
@@ -49,7 +49,7 @@
         <hr id="separator">
 
         <!-- Comments -->
-        <h3 id="center">Comments (<%= @event.comments.count %>)</h3>
+        <h3 class="center" id="comment_count">Comments (<%= @event.comments.count %>)</h3>
         <hr>
         <div class="media comment_list" ">
           <%= render @comments %>

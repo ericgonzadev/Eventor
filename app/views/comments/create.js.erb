@@ -1,3 +1,4 @@
 $(".comment_text").val('');
 $(".comment_list").append("<%= j render @comment %>");
 $("#comment_<%= @comment.id %>").hide().fadeIn(800);
+$("#comment_count").text("Comments (<%= @comment.event.comments.count %>)");

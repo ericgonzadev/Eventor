@@ -1,0 +1,4 @@
+$("#comment_<%= @comment.id %>").fadeOut(500, function(){
+	$(this).remove();
+})
+$("#comment_count").text("Comments (<%= @comment.event.comments.count %>)");

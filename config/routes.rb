@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch '/create-event',  to: 'events#create'
 
   resources :users do
+    resources :comments
     member do
       get :attending
     end
@@ -28,4 +29,5 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :edit]
   resources :events
   resources :attends, only: [:create, :destroy]
+  resources :comments, only: [:create, :destroy]
 end

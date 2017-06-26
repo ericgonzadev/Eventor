@@ -1,11 +1,17 @@
 <div class="comment_div" id="comment_<%= comment.id %>">
-  <a class="pull-left" href="#">
+  <a class="pull-left" href="/users/<%= comment.user_id %>">
     <img class="media-object" src="http://placehold.it/64x64" alt="">
   </a>
   <div class="media-body">
-    <h4 class="media-heading"><%= comment.user_name %>
+    <h4 class="media-heading">
+      <a href="/users/<%= comment.user_id %>">
+        <%= User.find(comment.user_id).name %>
+      </a>
       <small><%= comment.created_at.to_formatted_s(:long_ordinal) %></small>
     </h4>
     <%= comment.body %>
+    <% if current_user && current_user == comment.user %>
+      <div class="pull-right"><%= link_to "Delete", comment, method: :delete, remote: true %></div>
+    <% end %>
   </div><br><br>
 </div>
