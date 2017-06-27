@@ -5,12 +5,13 @@ class Event < ActiveRecord::Base
   has_many :passive_attends, class_name: "Attend", foreign_key: "attended_event_id", dependent: :destroy
   has_many :attendees, through: :passive_attends, source: :attendee
   has_many :comments
-  before_validation :normalize_title
   validates :title, presence: true, length: {maximum: 100}
   validates :description, presence: true, length: {maximum: 1000}
   validates :address, presence: true
   validates :category_id, presence: true
   validate  :picture_size
+  after_validation :normalize_title
+  after_validation :exclude_united_states_text_from_address
   geocoded_by :address
   after_validation :geocode, :if => :address_changed?
 
@@ -48,5 +49,9 @@ private
 
   def normalize_title
     self.title = title.downcase.titleize
+  end
+
+  def exclude_united_states_text_from_address
+    self.address = address.gsub!(/(united states)/i, " ").strip!.chomp!(",") if address.downcase.include?("united states")
   end
 end
