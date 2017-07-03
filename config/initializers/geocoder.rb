@@ -2,6 +2,7 @@ Geocoder.configure(
   # Geocoding options
   :timeout      => 7,           # geocoding service timeout (secs)
   :lookup       => :google,     # name of geocoding service (symbol)
+  :ip_lookup    => :ipapi_com,  # Use ipapi_com services for ip lookup
   :language     => :en,         # ISO-639 language code
   :use_https    => true,        # use HTTPS for lookup requests? (if supported)
   :http_proxy   => '',          # HTTP proxy server (user:pass@host:port)
