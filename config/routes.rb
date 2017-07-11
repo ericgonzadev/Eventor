@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   root 'pages#index'
 
-  get 'about', to: 'pages#about'
+  get '/about', to: 'pages#about'
   get '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   get '/login', to: 'sessions#new'

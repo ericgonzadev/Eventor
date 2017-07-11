@@ -19,10 +19,13 @@
 # Ignore uploaded test images.
 /public/uploads
 
-#Ignore byebug history
+# Ignore byebug history
 .byebug_history
 /.byebug_history
 /byebug_history
 
-#Ignore DS_store
+# Ignore DS_store
 .DS_Store
+
+# Ignore Spring files.
+/spring/*.pid

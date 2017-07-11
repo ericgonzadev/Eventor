@@ -5,5 +5,5 @@ one:
   attended_event_id: 1
 
 two:
-  attendee_id: 1
+  attendee_id: 2
   attended_event_id: 1
