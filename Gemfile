@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '5.0.1'
+gem 'rails', '5.0.2'
 # Use sqlite3 as the database for Active Record
 group :development, :test do
   gem 'sqlite3'
@@ -53,6 +53,9 @@ gem 'gmaps4rails'
 
 #Ruby I18n
 gem 'i18n'
+
+# Suite of testing facilities supporting TDD, BDD, mocking, and benchmarking
+gem 'minitest', '~> 5.10', '!= 5.10.2'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
