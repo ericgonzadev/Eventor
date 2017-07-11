@@ -1,10 +1,17 @@
 class PagesController < ApplicationController
-	def index
-		visitor_latitude = request.location.latitude
-		visitor_longitude = request.location.longitude
-		@events = Event.featured(visitor_latitude, visitor_longitude)
-	end
+  def index
+    # Test geocoding services locally by hardcoding latitude and longitude
+    if Rails.env.development?
+      visitor_latitude = 34.05223 
+      visitor_longitude = -118.24368
+    else
+      visitor_latitude = request.location.latitude
+      visitor_longitude = request.location.longitude
+    end
 
-	def about
-	end
+    @events = Event.featured(visitor_latitude, visitor_longitude)
+  end
+
+  def about
+  end
 end
