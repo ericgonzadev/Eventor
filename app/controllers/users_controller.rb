@@ -46,7 +46,7 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    authorized?(@user)
+    return if authorized?(@user)
     if @user.update(user_params)
       flash[:success] = "Updated Successfully"
       redirect_to @user

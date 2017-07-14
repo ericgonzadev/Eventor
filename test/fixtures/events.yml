@@ -1,13 +1,23 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  description: MyString
-  date: 2016-09-25 23:33:41
-  user_id: 
+event:
+  title: test event
+  description: This is a test event
+  date: <%= 3.days.from_now %>
+  user_id: 1
+  latitude: 34.05223 
+  longitude: -118.24368
+  address: Los Angeles, CA
+  category_id: 450215487
 
-two:
-  title: MyString
-  description: MyString
-  date: 2016-09-25 23:33:41
-  user_id: 
+first_upcoming_event:
+  title: test event
+  description: This is a test event
+  date: <%= 1.days.from_now %>
+  user_id: 1
+  latitude: 34.05223 
+  longitude: -118.24368
+  address: Los Angeles, CA
+  category_id: 450215487
+
+

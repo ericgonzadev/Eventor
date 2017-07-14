@@ -21,7 +21,7 @@ private
     end
   end
 
-  #Verifies user is owner of resource
+  # Verifies user is owner of resource
   def authorized?(resource)
     if resource.class == Event
       redirect_to root_path unless current_user && current_user.id == resource.user_id
