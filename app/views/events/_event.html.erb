@@ -2,7 +2,7 @@
             <a href=<%= "/events/#{event.id}" %>>
             <div class="thumbnail">
               <% if event.picture? %>
-                <%= image_tag event.picture.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
+                <%= image_tag event.picture.thumb.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
               <% else %>
                 <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
               <% end %>

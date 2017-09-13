@@ -6,11 +6,19 @@ class PictureUploader < CarrierWave::Uploader::Base
   # include CarrierWave::RMagick
   include CarrierWave::MiniMagick
 
+  # Images will be resized to height 350 and it's proportion width
+  process resize_to_limit: [1000000, 350]
+
   # Choose what kind of storage to use for this uploader:
   if Rails.env.production?
     storage :fog
   else
     storage :file
+  end
+
+  # Creates thumbnail size of image
+  version :thumb do
+    process resize_to_fill: [261,180]
   end
 
   # Override the directory where uploaded files will be stored.
