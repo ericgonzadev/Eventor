@@ -10,7 +10,8 @@
                 <h4 class="wrap"><%= link_to "#{event.title}", event %></h4>
                 <p>Created by: <%= link_to event.user.name, event.user %><br>
                 <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
-                <%= event.date.strftime("Time: %I : %M %p") %></p>
+                <%= event.date.strftime("Time: %I : %M %p") %><br>
+                Category: <a href="/events?utf8=✓&search=&location=&category=<%=event.category_id %>"><%= Category.find(event.category_id).name %></a></p>
               </div>
               <div class="attendees">
                 <% if event.date > Time.now %>
