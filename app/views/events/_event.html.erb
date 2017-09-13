@@ -1,5 +1,4 @@
 <div class="col-sm-4 col-lg-4 col-md-4" onclick="document.location='<%= event_path(event.id)%>'" style="cursor: pointer;">
-            <a href=<%= "/events/#{event.id}" %>>
             <div class="thumbnail">
               <% if event.picture? %>
                 <%= image_tag event.picture.thumb.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
@@ -7,7 +6,7 @@
                 <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
               <% end %>
               <div class="caption">
-                <h4 class="wrap"><%= link_to "#{event.title}", event %></h4>
+                <h4 class="wrap"><%= truncate event.title, length: 60 %></h4>
                 <p>Created by: <%= link_to event.user.name, event.user %><br>
                 <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
                 <%= event.date.strftime("Time: %I : %M %p") %><br>
