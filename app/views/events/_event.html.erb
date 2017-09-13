@@ -6,7 +6,7 @@
                 <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
               <% end %>
               <div class="caption">
-                <h4 class="wrap"><%= truncate event.title, length: 60 %></h4>
+                <h4 class="wrap"><%= truncate event.title, length: 49 %></h4>
                 <p>Created by: <%= link_to event.user.name, event.user %><br>
                 <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
                 <%= event.date.strftime("Time: %I : %M %p") %><br>
