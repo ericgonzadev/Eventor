@@ -1,3 +1,5 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-
+one:
+  id: 450215487
+  name: Test_category
