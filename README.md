@@ -2,7 +2,7 @@
 
 START EXPLORING, CREATING, AND ATTENDING EVENTS NOW! (EventBrite Clone)
 
-Check it out: https://railseventor.herokuapp.com
+Check it out: https://rails-eventor.herokuapp.com/
 
 ## Application / Version Information
 
