@@ -1,4 +1,4 @@
-# Eventor
+# Eventor [![Build Status](https://travis-ci.org/Twinpair/Eventor.svg?branch=master)](https://travis-ci.org/Twinpair/Eventor)
 
 START EXPLORING, CREATING, AND ATTENDING EVENTS NOW! (EventBrite Clone)
 
