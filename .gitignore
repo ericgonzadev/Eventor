@@ -29,3 +29,6 @@
 
 # Ignore Spring files.
 /spring/*.pid
+
+# Ignore files created by simplecov gem
+coverage
