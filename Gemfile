@@ -3,6 +3,8 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.2'
+# Use PostGres as the database
+gem 'pg'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -38,8 +40,6 @@ gem 'i18n'
 gem 'minitest', '~> 5.10', '!= 5.10.2'
 
 group :production do
-  # Use PostGres as the database on production (Heroku)
-  gem 'pg'
   gem 'rails_12factor'
 end
 
