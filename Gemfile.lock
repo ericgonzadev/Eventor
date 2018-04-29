@@ -392,7 +392,7 @@ DEPENDENCIES
   mini_magick (= 4.5.1)
   minitest (~> 5.10, != 5.10.2)
   minitest-reporters (= 1.1.14)
-  pg
+  pg (= 0.21.0)
   rails (= 5.0.2)
   rails-controller-testing (= 1.0.2)
   rails_12factor
