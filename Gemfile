@@ -28,7 +28,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
 gem 'font-awesome-sass'
 #Image support
-gem 'carrierwave', '0.11.2'
+gem 'carrierwave', '1.3.2'
 gem 'mini_magick', '4.5.1'
 gem 'fog', '1.38.0'
 #Object geocoding
