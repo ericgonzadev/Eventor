@@ -7,8 +7,8 @@ gem 'rails', '~> 7.0.0'
 gem 'pg', '~> 1.5'
 # Use Puma as the app server
 gem 'puma', '~> 6.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+# Use Terser as compressor for JavaScript assets (Rails 7 default; replaces uglifier)
+gem 'terser', '~> 1.2'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster
