@@ -32,3 +32,6 @@
 
 # Ignore files created by simplecov gem
 coverage
+
+# Env Variables
+.env
