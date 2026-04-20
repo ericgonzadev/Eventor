@@ -5,5 +5,4 @@ before_script:
   - bundle exec rake db:migrate RAILS_ENV=test
 
 rvm:
-  - 2.3
-  - 2.4
+  - 3.2.2

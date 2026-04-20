@@ -1,4 +1,4 @@
-class CreateAttends < ActiveRecord::Migration
+class CreateAttends < ActiveRecord::Migration[5.0]
   def change
     create_table :attends do |t|
       t.integer :attendee_id
