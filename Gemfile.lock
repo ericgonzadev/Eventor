@@ -120,6 +120,7 @@ GEM
       logger
     execjs (2.10.1)
     ffi (1.17.4-x86_64-darwin)
+    ffi (1.17.4-x86_64-linux-gnu)
     fog-aws (3.33.1)
       base64 (>= 0.2, < 0.4)
       fog-core (~> 2.6)
@@ -218,10 +219,13 @@ GEM
     nio4r (2.7.5)
     nokogiri (1.19.2-x86_64-darwin)
       racc (~> 1.4)
+    nokogiri (1.19.2-x86_64-linux-gnu)
+      racc (~> 1.4)
     notiffany (0.1.3)
       nenv (~> 0.1)
       shellany (~> 0.0)
     pg (1.6.3-x86_64-darwin)
+    pg (1.6.3-x86_64-linux)
     pry (0.16.0)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -300,6 +304,7 @@ GEM
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
     sqlite3 (1.7.3-x86_64-darwin)
+    sqlite3 (1.7.3-x86_64-linux)
     ssrf_filter (1.5.0)
     thor (1.5.0)
     tilt (2.7.0)
@@ -325,6 +330,7 @@ GEM
 
 PLATFORMS
   x86_64-darwin-24
+  x86_64-linux
 
 DEPENDENCIES
   bcrypt (~> 3.1)
