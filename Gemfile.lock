@@ -114,6 +114,10 @@ GEM
     csv (3.3.5)
     date (3.5.1)
     docile (1.4.1)
+    dotenv (3.2.0)
+    dotenv-rails (3.2.0)
+      dotenv (= 3.2.0)
+      railties (>= 6.1)
     drb (2.2.3)
     erubi (1.13.1)
     excon (1.4.2)
@@ -340,6 +344,7 @@ DEPENDENCIES
   byebug
   carrierwave (~> 3.0)
   coffee-rails (~> 5.0)
+  dotenv-rails
   fog-aws
   font-awesome-sass
   geocoder
