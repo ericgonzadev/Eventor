@@ -44,6 +44,13 @@ Rails.application.configure do
   # when problems arise.
   config.log_level = :debug
 
+  # Log to STDOUT when RAILS_LOG_TO_STDOUT env var is set (Render, Heroku, Fly, etc.)
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger           = ActiveSupport::Logger.new(STDOUT)
+    logger.formatter = config.log_formatter
+    config.logger    = ActiveSupport::TaggedLogging.new(logger)
+  end
+
   # Use a different logger for distributed setups.
   # config.logger = ActiveSupport::TaggedLogging.new(SyslogLogger.new)
 
