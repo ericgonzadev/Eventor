@@ -8,9 +8,10 @@
               <div class="caption">
                 <h4 class="wrap"><%= truncate event.title, length: 49 %></h4>
                 <p>Created by: <%= link_to event.user.name, event.user %><br>
-                <%= event.date.strftime("Date: %a, %b %d %Y") %><br>
-                <%= event.date.strftime("Time: %I : %M %p") %><br>
-                Category: <a href="/events?utf8=✓&search=&location=&category=<%=event.category_id %>"><%= Category.find(event.category_id).name %></a></p>
+                <strong><%= truncate event.address, length: 40 %></strong><br>
+                <%= event.date.strftime("%a, %b %d %Y") %><br>
+                <%= event.date.strftime("%I : %M %p") %><br>
+                <a href="/events?utf8=✓&search=&location=&category=<%=event.category_id %>"><%= Category.find(event.category_id).name %></a></p>
               </div>
               <div class="attendees">
                 <% if event.date > Time.now %>
