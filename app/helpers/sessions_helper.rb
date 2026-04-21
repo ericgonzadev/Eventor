@@ -4,11 +4,14 @@ module SessionsHelper
     session[:user_id] = user.id
   end
 
-  # Returns current user (if any)
+  # Returns current user (if any). Returns nil and clears a stale session
+  # if the referenced user no longer exists.
   def current_user
-    if user_id = session[:user_id]
-      @current_user = User.find(user_id)
+    if (user_id = session[:user_id])
+      @current_user ||= User.find_by(id: user_id)
+      log_out if @current_user.nil?
     end
+    @current_user
   end
 
   # Logs out the current user
