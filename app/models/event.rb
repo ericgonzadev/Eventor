@@ -24,7 +24,11 @@ class Event < ActiveRecord::Base
   end
 
   def Event.featured(visitor_latitude, visitor_longitude)
-    Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(6)
+    nearby = Event.upcoming.near([visitor_latitude, visitor_longitude], 20).limit(3).to_a
+    return nearby if nearby.any?
+
+    # Fallback: no upcoming events within 20 miles — show 3 random upcoming events instead
+    Event.upcoming.order("RANDOM()").limit(3)
   end
 
   def has_valid_date?
