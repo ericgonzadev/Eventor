@@ -46,11 +46,11 @@
             (<%= page_entries_info(@events) %>)
           </div>
           <hr>
-          <%= will_paginate(@events) %><br>
+          <%= paginate @events %><br>
           <% if @events.any? %>
             <%= render @events %>
           <% end %>
-          <%= will_paginate(@events) %>
+          <%= paginate @events %>
         </div>
       </div>
     </div>

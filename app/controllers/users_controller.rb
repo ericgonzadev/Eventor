@@ -27,14 +27,14 @@ class UsersController < ApplicationController
     
     if params[:timeline] == "#{@display_name} Upcoming Events"
       @title = params[:timeline]
-      @events = @user.upcoming_events.paginate(page: params[:page], per_page: 12)
+      @events = @user.upcoming_events.page(params[:page]).per(12)
     elsif params[:timeline] == "#{@display_name} Past Events"
       @title = params[:timeline]
-      @events = @user.past_events.paginate(page: params[:page], per_page: 12)
+      @events = @user.past_events.page(params[:page]).per(12)
     else
       @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s"
       @special ? @title = "Events #{@special} Attending" : @title = "Events #{@display_name} Attending"
-      @events = @user.attending.where("date > ?", Time.now).paginate(page: params[:page], per_page: 12)
+      @events = @user.attending.where("date > ?", Time.now).page(params[:page]).per(12)
       @display_name = "#{@user.name}'s" if @display_name == "#{@user.name} is"
     end
   end

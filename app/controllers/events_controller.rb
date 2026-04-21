@@ -3,9 +3,9 @@ class EventsController < ApplicationController
 
   def index
     if params[:category]
-      @events =  Event.search(params).paginate(page: params[:page], per_page: 12)
+      @events = Event.search(params).page(params[:page]).per(12)
     else
-      @events =  Event.upcoming.paginate(page: params[:page], per_page: 12)
+      @events = Event.upcoming.page(params[:page]).per(12)
     end
   end
 
@@ -65,7 +65,7 @@ class EventsController < ApplicationController
 
   def attendees
     @event  = Event.find(params[:id])
-    @users = @event.attendees.paginate(page: params[:page])
+    @users = @event.attendees.page(params[:page])
   end
 
 private
