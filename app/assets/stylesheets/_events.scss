@@ -1,0 +1,107 @@
+@import "variables";
+
+// =====================================================================
+// Body padding for fixed navbar
+// =====================================================================
+body {
+  padding-top: 64px;
+}
+
+// =====================================================================
+// Legacy thumbnail styles (kept narrow — most card styling now lives
+// in _components.scss under .card-event*)
+// =====================================================================
+.thumbnail {
+  border: none;
+  background: $surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow;
+  padding: 0;
+  overflow: hidden;
+}
+.thumbnail img {
+  width: 100%;
+}
+.thumbnail .caption-full {
+  padding: $space-md;
+  color: $text;
+}
+
+// =====================================================================
+// Events index sidebar
+// =====================================================================
+#search-sidebar {
+  padding-top: 0;
+}
+
+#timeline {
+  width: 100%;
+}
+
+// =====================================================================
+// Event show page
+// =====================================================================
+#event-show-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  border-radius: $radius-lg;
+  margin: 0 auto $space-lg;
+  box-shadow: $shadow;
+}
+
+#show-edit-button {
+  margin-right: $space-sm;
+}
+
+#map {
+  width: 100%;
+  height: 320px;
+  border-radius: $radius-md;
+  overflow: hidden;
+}
+
+#event-sidebar {
+  background: $surface;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  padding: $space-lg;
+}
+#event-sidebar p.lead {
+  font-size: 14px;
+  color: $text-muted;
+  margin-bottom: 12px;
+}
+#event-sidebar p.lead b {
+  color: $text;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+  font-family: $font-ui;
+}
+
+// Comment button positioning fix (was 43% left margin)
+#comment-button {
+  margin-left: 0;
+}
+
+// =====================================================================
+// Utilities
+// =====================================================================
+.center { text-align: center; }
+.wrap   { word-wrap: break-word; }
+
+// Attending count (kept the original green)
+.attendees {
+  color: $success;
+}
+
+// Old caption rules (neutralized — new card uses different structure)
+.caption {
+  height: auto;
+  overflow: visible;
+}
+.caption h4 {
+  white-space: normal;
+}

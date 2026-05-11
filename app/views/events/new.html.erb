@@ -1,9 +1,11 @@
-  <% provide(:title, "Create Event") %> 
-  
-  <div class="container text-center">
-    <div class="row">
-      <h3>Create an Event</h3>
-      <hr> 
-    </div> 
-    <%= render "event_form", url: create_event_path, button: "Create Event" %>
+<% provide(:title, "Create Event") %>
+
+<div class="container page-wrap">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 text-center mb-lg">
+      <h2 class="page-title">Create an event</h2>
+      <p class="page-subtitle">Fill in the details below to get people excited.</p>
+    </div>
   </div>
+  <%= render "event_form", url: create_event_path, button: "Create Event" %>
+</div>

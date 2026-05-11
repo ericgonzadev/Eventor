@@ -1,0 +1,468 @@
+@import "variables";
+
+// =====================================================================
+// Base
+// =====================================================================
+body {
+  background: $cream;
+  color: $text;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: $primary;
+  transition: color $transition-fast;
+}
+a:hover,
+a:focus {
+  color: $primary-dark;
+  text-decoration: none;
+}
+
+// =====================================================================
+// Buttons (override Bootstrap 3)
+// =====================================================================
+.btn {
+  font-family: $font-ui;
+  font-weight: 600;
+  border: none;
+  border-radius: $radius-pill;
+  text-transform: none;
+  letter-spacing: 0.01em;
+  padding: 10px 22px;
+  transition: all $transition;
+  box-shadow: $shadow-sm;
+  cursor: pointer;
+}
+
+.btn:focus,
+.btn:active:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(240, 95, 64, 0.25);
+}
+
+.btn-primary,
+.btn-primary:focus {
+  background: $primary;
+  color: #fff;
+  border: none;
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active {
+  background: $primary-dark !important;
+  border: none !important;
+  color: #fff !important;
+  transform: translateY(-1px);
+  box-shadow: $shadow-md;
+}
+
+.btn-default,
+.btn-default:focus {
+  background: $surface;
+  color: $text;
+  border: 1px solid $border;
+}
+.btn-default:hover {
+  background: $surface-alt;
+  border-color: darken($border, 5%);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: $primary;
+  border: 1.5px solid $primary;
+  box-shadow: none;
+}
+.btn-ghost:hover {
+  background: $primary-light;
+  color: $primary-dark;
+}
+
+.btn-danger,
+.btn-danger:focus {
+  background: $danger;
+  color: #fff;
+}
+.btn-danger:hover {
+  background: darken($danger, 8%) !important;
+  color: #fff !important;
+}
+
+.btn-xl {
+  padding: 14px 32px;
+  font-size: 15px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+// =====================================================================
+// Forms
+// =====================================================================
+.form-control {
+  border-radius: $radius-md;
+  border: 1.5px solid $border;
+  padding: 10px 14px;
+  height: auto;
+  font-family: $font-ui;
+  font-size: 15px;
+  color: $text;
+  background: $surface;
+  box-shadow: none;
+  transition: border-color $transition-fast, box-shadow $transition-fast;
+}
+.form-control:focus {
+  border-color: $primary;
+  box-shadow: 0 0 0 3px rgba(240, 95, 64, 0.15);
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+select.form-control {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3e%3cpath fill='none' stroke='%237A736D' stroke-width='2' d='M1 1l5 5 5-5'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+label {
+  font-family: $font-ui;
+  font-weight: 600;
+  color: $text;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+#required {
+  color: $primary;
+  margin-left: 2px;
+}
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+// =====================================================================
+// Cards
+// =====================================================================
+.card {
+  background: $surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow;
+  padding: $space-lg;
+  transition: all $transition;
+}
+.card-soft {
+  background: $surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border;
+}
+
+// Event card (used for thumbnail-style cards)
+.card-event {
+  display: block;
+  background: $surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow;
+  overflow: hidden;
+  text-decoration: none;
+  color: $text;
+  transition: all $transition;
+  margin-bottom: $space-lg;
+  position: relative;
+  height: 100%;
+}
+.card-event:hover {
+  box-shadow: $shadow-lg;
+  transform: translateY(-4px);
+  color: $text;
+  text-decoration: none;
+}
+.card-event__image {
+  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  background: $surface-alt;
+}
+.card-event__body {
+  padding: 18px 20px 20px;
+}
+.card-event__title {
+  font-family: $font-ui;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 1.3;
+  margin: 0 0 10px;
+  color: $text;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.card-event__meta {
+  font-family: $font-ui;
+  font-size: 13px;
+  color: $text-muted;
+  line-height: 1.6;
+  margin: 0;
+}
+.card-event__meta strong {
+  color: $text;
+  font-weight: 600;
+}
+.card-event__location {
+  font-weight: 600;
+  color: $text;
+  display: block;
+  margin: 6px 0;
+}
+.card-event__creator {
+  display: inline;
+}
+.card-event__creator a {
+  color: $primary;
+  font-weight: 600;
+}
+.card-event__footer {
+  padding: 0 20px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+// =====================================================================
+// Pills & Badges
+// =====================================================================
+.pill {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: $radius-pill;
+  font-family: $font-ui;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  text-decoration: none;
+  letter-spacing: 0.02em;
+}
+.pill-category {
+  background: $primary-light;
+  color: $primary-dark;
+}
+.pill-category:hover {
+  background: darken($primary-light, 4%);
+  color: $primary-dark;
+}
+.pill-attending {
+  background: $success-light;
+  color: $success;
+}
+.pill-attended {
+  background: $surface-alt;
+  color: $text-muted;
+}
+.pill-accent {
+  background: $accent-light;
+  color: $accent;
+}
+
+// =====================================================================
+// Alerts (override Bootstrap 3)
+// =====================================================================
+.alert {
+  border-radius: $radius-md;
+  border: none;
+  padding: 14px 18px;
+  font-family: $font-ui;
+  font-weight: 500;
+  box-shadow: $shadow-sm;
+}
+.alert-success {
+  background: $success-light;
+  color: darken($success, 10%);
+}
+.alert-danger {
+  background: $danger-light;
+  color: darken($danger, 10%);
+}
+.alert-warning {
+  background: $warning-light;
+  color: darken($warning, 15%);
+}
+.alert-info {
+  background: $info-light;
+  color: darken($info, 10%);
+}
+
+// =====================================================================
+// Sidebar / List groups
+// =====================================================================
+.sidebar-card {
+  background: $surface;
+  border-radius: $radius-lg;
+  padding: $space-lg;
+  box-shadow: $shadow-sm;
+  border: 1px solid $border;
+  margin-bottom: $space-md;
+}
+.sidebar-card h4 {
+  font-family: $font-ui;
+  font-weight: 700;
+  font-size: 16px;
+  margin: 0 0 14px;
+  color: $text;
+}
+
+.list-group {
+  border-radius: $radius-md;
+  overflow: hidden;
+  box-shadow: none;
+  margin-bottom: 0;
+}
+.list-group-item {
+  border: 1px solid $border;
+  background: $surface;
+  color: $text;
+  font-family: $font-ui;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 12px 16px;
+  transition: all $transition-fast;
+}
+.list-group-item:first-child {
+  border-top-left-radius: $radius-md;
+  border-top-right-radius: $radius-md;
+}
+.list-group-item:last-child {
+  border-bottom-left-radius: $radius-md;
+  border-bottom-right-radius: $radius-md;
+}
+.list-group-item:hover,
+.list-group-item.active {
+  background: $primary-light;
+  color: $primary-dark;
+  border-color: $border;
+}
+button.list-group-item {
+  width: 100%;
+  text-align: left;
+}
+
+// =====================================================================
+// Avatars (for comments)
+// =====================================================================
+.avatar-initial {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: $primary-light;
+  color: $primary-dark;
+  font-family: $font-ui;
+  font-weight: 700;
+  font-size: 16px;
+  flex-shrink: 0;
+}
+.avatar-initial--sm {
+  width: 32px;
+  height: 32px;
+  font-size: 13px;
+}
+
+// =====================================================================
+// Page wrapper / sections
+// =====================================================================
+.page-wrap {
+  padding-top: 90px; // navbar offset
+  padding-bottom: $space-xxl;
+  min-height: 100vh;
+}
+.page-title {
+  font-family: $font-ui;
+  font-weight: 700;
+  color: $text;
+  margin: 0 0 12px;
+}
+.page-subtitle {
+  color: $text-muted;
+  font-family: $font-body;
+  font-size: 15px;
+  margin: 0 0 28px;
+}
+.section-soft {
+  background: $surface-alt;
+  padding: $space-xxl 0;
+}
+
+// =====================================================================
+// Helpers
+// =====================================================================
+.text-muted { color: $text-muted !important; }
+.text-soft  { color: $text-soft !important; }
+.muted-link { color: $text-muted; }
+.muted-link:hover { color: $primary; }
+.mt-sm { margin-top: $space-sm; }
+.mt-md { margin-top: $space-md; }
+.mt-lg { margin-top: $space-lg; }
+.mb-sm { margin-bottom: $space-sm; }
+.mb-md { margin-bottom: $space-md; }
+.mb-lg { margin-bottom: $space-lg; }
+
+// =====================================================================
+// Comments
+// =====================================================================
+.comment-item {
+  display: flex;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid $border;
+}
+.comment-item:last-child { border-bottom: none; }
+.comment-item__body {
+  flex: 1;
+  min-width: 0;
+}
+.comment-item__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 4px;
+  flex-wrap: wrap;
+}
+.comment-item__author {
+  font-family: $font-ui;
+  font-weight: 700;
+  color: $text;
+  font-size: 14px;
+}
+.comment-item__time {
+  font-family: $font-ui;
+  color: $text-soft;
+  font-size: 12px;
+}
+.comment-item__text {
+  font-family: $font-body;
+  color: $text;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+  word-wrap: break-word;
+}
+.comment-item__delete {
+  color: $text-soft;
+  font-size: 12px;
+  font-family: $font-ui;
+}
+.comment-item__delete:hover { color: $danger; }

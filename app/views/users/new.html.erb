@@ -1,12 +1,20 @@
-  <% provide(:title, "Sign Up") %>
+<% provide(:title, "Sign Up") %>
 
-  <!-- Page Content -->
-  <div class="container text-center">
-    <div class="row">
-      <h3>Sign Up</h3>
-      (All fields are required)
-      <hr>
+<div class="container page-wrap">
+  <div class="row">
+    <div class="col-md-5 col-md-offset-3 col-sm-8 col-sm-offset-2">
+      <div class="text-center mb-lg">
+        <h2 class="page-title">Welcome to Eventor</h2>
+        <p class="page-subtitle">Create an account to start discovering and creating events.</p>
+      </div>
+
+      <div class="card">
+        <%= render "user_form", url: signup_path, button_text: "Sign Up" %>
+      </div>
+
+      <p class="text-center mt-lg text-muted">
+        Already have an account? <%= link_to "Log in", login_path %>
+      </p>
     </div>
-    <%= render "user_form", url: signup_path, button_text: "Sign Up" %>
-    <p>Already have an account? <%= link_to "Login Here", login_path %></p>
   </div>
+</div>

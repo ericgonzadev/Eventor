@@ -1,71 +1,80 @@
-  <% provide(:title, "Home") %>
+<% provide(:title, "Home") %>
 
-  <!-- Page Conent -->
-  <header id="body-up">
-    <div class="header-content">
-      <div class="header-content-inner">
-        <h1 id="homeHeading">Start exploring, creating, and attending events now!</h1>
+<!-- Hero -->
+<header id="body-up">
+  <div class="header-content">
+    <div class="header-content-inner">
+      <h1 id="homeHeading">Find events you'll love.</h1>
+      <h2>Discover, create, and attend events happening in your community.</h2>
+      <% if current_user %>
+        <%= link_to "Browse Events", events_path, class: "btn btn-primary btn-xl" %>
+      <% else %>
+        <%= link_to "Get Started — It's Free", signup_path, class: "btn btn-primary btn-xl" %>
+      <% end %>
+    </div>
+  </div>
+</header>
+
+<!-- How it works -->
+<aside>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 text-center">
+        <h2 class="section-heading">Everything you need to host or attend.</h2>
         <hr>
-        <% if current_user %>
-          <h2>Check Out Upcoming Events By Clicking Below</h2><br>
-          <%= link_to "Browse All Events", events_path, class: "btn btn-primary btn-xl" %>
-        <% else %>
-          <h2>Sign Up Now!</h2><br>
-          <%= link_to "Sign Up!", signup_path, class: "btn btn-primary btn-xl" %>
-        <% end %>
       </div>
     </div>
-  </header>
+    <div class="row">
+      <div class="col-lg-4 col-md-6">
+        <div class="service-box">
+          <i class="fa fa-3x fa-search"></i>
+          <h3><%= link_to "Explore", events_path %></h3>
+          <p>Search events by name, location, or category — find something that suits your vibe.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-box">
+          <i class="fa fa-3x fa-calendar"></i>
+          <h3><%= link_to "Create", create_event_path %></h3>
+          <p>Plan your own gathering in minutes. Add a photo, pick a category, and invite the world.</p>
+        </div>
+      </div>
+      <div class="col-lg-4 col-md-6">
+        <div class="service-box">
+          <i class="fa fa-3x fa-user-plus"></i>
+          <h3><%= link_to "Attend", events_path %></h3>
+          <p>RSVP to events you're excited about and see who else is going.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</aside>
 
-  <aside class="bg-dark">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12 text-center">
-          <h1 id="homeHeading">Always find things to do!</h1>
-          <hr class="primary">
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="service-box">
-            <i class="fa fa-4x fa-search"></i>
-            <h3><%= link_to "Explore Events", events_path %></h3>
-            <p class="text-faded">You can search events by name, zip code, city, and categories!</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="service-box">
-            <i class="fa fa-4x fa-calendar"></i>
-            <h3><%= link_to "Create Events", create_event_path %></h3>
-            <p class="text-faded">Create your own events and start invting you friends!</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-6 text-center">
-          <div class="service-box">
-            <i class="fa fa-4x fa-user-plus"></i>
-            <h3><%= link_to "Attend Events", events_path %></h3>
-            <p class="text-faded">Once you find an event you're interested in, you can choose to attend the event.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </aside>
-
-  <section id="contact">
-    <div class="col-md-8 col-md-offset-2 text-center">
-      <div class="row">
-        <h3 id="events">Events Near You</h3>
+<!-- Featured nearby events -->
+<section id="contact">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1 text-center">
+        <h2 class="section-heading" id="events">Featured Events</h2>
+        <p class="text-muted">A handful of events worth checking out.</p>
         <hr>
-        <% if @events.any? %>
-          <%= render @events %>
-        <% else %>
-          <p>No events nearby</p>
-        <% end %>
-      </div>
-      <div class="row">
-        <%= link_to "Browse All Events", events_path, class: "btn btn-primary btn-xl" %>
       </div>
     </div>
-  </section>
+
+    <% if @events.any? %>
+      <div class="row">
+        <%= render @events %>
+      </div>
+    <% else %>
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2 text-center">
+          <p class="text-muted">No events to show right now.</p>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row text-center mt-lg">
+      <%= link_to "Browse All Events", events_path, class: "btn btn-primary btn-xl" %>
+    </div>
+  </div>
+</section>

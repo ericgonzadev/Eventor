@@ -1,24 +1,28 @@
-<div class="col-sm-4 col-lg-4 col-md-4" onclick="document.location='<%= event_path(event.id)%>'" style="cursor: pointer;">
-            <div class="thumbnail">
-              <% if event.picture? %>
-                <%= image_tag event.picture.thumb.url, class: "img-responsive", id: "event-thumbnail", alt: event.picture %>
-              <% else %>
-                <%= image_tag "event-index-default.jpg", alt: "default-image", id: "event-thumbnail" %>
-              <% end %>
-              <div class="caption">
-                <h4 class="wrap"><%= truncate event.title, length: 49 %></h4>
-                <p>Created by: <%= link_to event.user.name, event.user %><br>
-                <strong><%= truncate event.address, length: 40 %></strong><br>
-                <%= event.date.strftime("%a, %b %d %Y") %><br>
-                <%= event.date.strftime("%I : %M %p") %><br>
-                <a href="/events?utf8=✓&search=&location=&category=<%=event.category_id %>"><%= Category.find(event.category_id).name %></a></p>
-              </div>
-              <div class="attendees">
-                <% if event.date > Time.now %>
-                  <p><%= pluralize(event.attendees.count, 'person') %> attending</p>
-                <% else %>
-                    <p><%= pluralize(event.attendees.count, 'person') %> attended</p>
-                <% end %>
-              </div>
-            </div>
-          </div>
+<div class="col-sm-6 col-md-4">
+  <%= link_to event_path(event), class: "card-event" do %>
+    <% if event.picture? %>
+      <%= image_tag event.picture.thumb.url, class: "card-event__image", alt: event.title %>
+    <% else %>
+      <%= image_tag "event-index-default.jpg", class: "card-event__image", alt: "default event image" %>
+    <% end %>
+
+    <div class="card-event__body">
+      <h4 class="card-event__title"><%= truncate event.title, length: 60 %></h4>
+
+      <p class="card-event__meta">
+        <span class="card-event__creator">Created by <strong><%= event.user.name %></strong></span>
+        <span class="card-event__location"><%= truncate event.address, length: 42 %></span>
+        <%= event.date.strftime("%a, %b %d %Y · %-I:%M %p") %>
+      </p>
+    </div>
+
+    <div class="card-event__footer">
+      <span class="pill pill-category"><%= Category.find(event.category_id).name %></span>
+      <% if event.date > Time.current %>
+        <span class="pill pill-attending"><i class="fa fa-users"></i> <%= event.attendees.count %> going</span>
+      <% else %>
+        <span class="pill pill-attended"><%= event.attendees.count %> attended</span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

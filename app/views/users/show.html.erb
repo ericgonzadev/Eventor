@@ -1,58 +1,66 @@
-  <% provide(:title, "#{@display_name} Profile") %>
+<% provide(:title, "#{@display_name} Profile") %>
 
-  <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9 col-md-offset-3 text-center">
-        <h1><%= @display_name  %> Profile</h1>
-        <hr>
-      </div>
+<div class="container page-wrap">
+  <div class="row">
+    <div class="col-md-12 text-center mb-lg">
+      <%= content_tag :div, @user.name.to_s.split.first(2).map { |w| w[0] }.join.upcase, class: "avatar-initial", style: "width: 80px; height: 80px; font-size: 28px; margin-bottom: 16px;" %>
+      <h1 class="page-title"><%= @user.name %></h1>
+      <p class="page-subtitle"><%= @user.events.count %> events created · <%= @user.attending.count %> attending</p>
     </div>
   </div>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 text-center" id="search-sidebar">
-        <% if current_user %>
-          <% if current_user.id == @user.id %>
-            <h4><b>Account</b></h4>
-            <div class="list-group">
-              <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
-              <%= link_to "Logout",logout_path, method: "delete", class: "list-group-item" %>
-            </div>
-          <% end %>
-        <% end %>
-        <h4><b>Filter Events by Condition</b></h4>
-        <div class="list-group">
-          <%= form_tag @user, method: :get do %>
-            <%= submit_tag "#{@display_name} Upcoming Events", name: "timeline", id: "timeline", class: "list-group-item" %>
-            <%= submit_tag "#{@display_name} Past Events", name: "timeline", id: "timeline", class: "list-group-item" %>    
+  <div class="row">
+    <!-- Sidebar -->
+    <div class="col-md-3" id="search-sidebar">
+      <% if current_user && current_user.id == @user.id %>
+        <div class="sidebar-card">
+          <h4>Account</h4>
+          <div class="list-group">
+            <%= link_to "Edit Account", edit_user_path, class: "list-group-item" %>
+            <%= link_to "Log Out", logout_path, method: "delete", class: "list-group-item" %>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="sidebar-card">
+        <h4>Filter</h4>
+        <%= form_tag @user, method: :get do %>
+          <div class="list-group">
+            <%= submit_tag "#{@display_name} Upcoming Events", name: "timeline", id: "timeline-upcoming", class: "list-group-item" %>
+            <%= submit_tag "#{@display_name} Past Events", name: "timeline", id: "timeline-past", class: "list-group-item" %>
             <% if @special %>
-              <%= submit_tag "Events #{@special} Attending", name: "timeline", id: "timeline", class: "list-group-item" %>    
+              <%= submit_tag "Events #{@special} Attending", name: "timeline", id: "timeline-attending", class: "list-group-item" %>
             <% else %>
               <% @display_name = "#{@user.name} is" if @display_name == "#{@user.name}'s" %>
-              <%= submit_tag "Events #{@display_name} Attending", name: "timeline", id: "timeline", class: "list-group-item" %>  
-              <%  @display_name = "#{@user.name}'s" %>
+              <%= submit_tag "Events #{@display_name} Attending", name: "timeline", id: "timeline-attending", class: "list-group-item" %>
+              <% @display_name = "#{@user.name}'s" %>
             <% end %>
-          <% end %>
-
-        </div>
-      </div>
-
-      <div class="col-md-9 text-center">
-        <div class="row">
-          <div id="sub-title">
-            <h3><%= @title %></h3>
-            (<%= page_entries_info(@events) %>)
           </div>
-          <hr>
-          <%= paginate @events %><br>
-          <% if @events.any? %>
-            <%= render @events %>
-          <% end %>
-          <%= paginate @events %>
-        </div>
+        <% end %>
       </div>
     </div>
-  </div>
 
+    <!-- Main -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-title"><%= @title %></h2>
+          <p class="page-subtitle"><%= page_entries_info(@events) %></p>
+        </div>
+      </div>
+
+      <% if @events.any? %>
+        <div class="row">
+          <%= render @events %>
+        </div>
+        <div class="row text-center mt-md">
+          <%= paginate @events %>
+        </div>
+      <% else %>
+        <div class="card text-center">
+          <p class="text-muted mb-0">Nothing to show here yet.</p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

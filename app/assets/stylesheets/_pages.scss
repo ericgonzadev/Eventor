@@ -1,0 +1,296 @@
+@import "variables";
+
+// =====================================================================
+// Base typography & layout
+// =====================================================================
+html,
+body {
+  height: 100%;
+  width: 100%;
+}
+body {
+  font-family: $font-body;
+  background: $cream;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-ui;
+  font-weight: 700;
+  letter-spacing: -0.005em;
+  color: $text;
+}
+p {
+  font-size: 16px;
+  line-height: 1.65;
+  margin-bottom: 16px;
+}
+hr {
+  border: none;
+  border-top: 2px solid $primary;
+  max-width: 60px;
+  margin: 24px auto;
+  opacity: 0.85;
+}
+hr.light {
+  border-top-color: rgba(255, 255, 255, 0.6);
+}
+hr.soft {
+  border-top: 1px solid $border;
+  max-width: 100%;
+  margin: 32px 0;
+}
+
+// =====================================================================
+// Navbar (override Bootstrap 3)
+// =====================================================================
+#mainNav,
+.navbar-default {
+  background-color: $surface !important;
+  border-color: transparent;
+  border-bottom: 1px solid $border;
+  box-shadow: $shadow-sm;
+  font-family: $font-ui;
+  transition: all $transition;
+  min-height: 64px;
+}
+.navbar-default .navbar-header .navbar-brand {
+  color: $primary !important;
+  font-family: $font-ui;
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  padding: 18px 16px;
+}
+.navbar-default .navbar-header .navbar-brand:hover,
+.navbar-default .navbar-header .navbar-brand:focus {
+  color: $primary-dark !important;
+}
+.navbar-default .navbar-header .navbar-toggle {
+  font-weight: 600;
+  font-size: 12px;
+  color: $primary;
+  text-transform: none;
+  border: 1px solid $border;
+  background: $surface;
+  border-radius: $radius-md;
+  margin-top: 14px;
+  padding: 8px 12px;
+}
+.navbar-default .nav > li > a {
+  text-transform: none !important;
+  font-weight: 600;
+  font-size: 14px;
+  color: $text !important;
+  padding: 22px 18px;
+  transition: color $transition-fast;
+}
+.navbar-default .nav > li > a:hover,
+.navbar-default .nav > li > a:focus {
+  color: $primary !important;
+  background-color: transparent;
+}
+.navbar-default .nav > li.active > a {
+  color: $primary !important;
+  background-color: transparent !important;
+}
+
+// =====================================================================
+// Hero header (homepage)
+// =====================================================================
+header {
+  position: relative;
+  width: 100%;
+  min-height: auto;
+  background-size: cover;
+  background-position: center;
+  background-image: linear-gradient(rgba(45, 42, 38, 0.5), rgba(45, 42, 38, 0.55)), asset-url('header-new.jpg');
+  text-align: center;
+  color: white;
+}
+header .header-content {
+  position: relative;
+  text-align: center;
+  padding: 110px 20px 90px;
+  width: 100%;
+}
+header .header-content .header-content-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+header .header-content .header-content-inner h1 {
+  font-weight: 800;
+  text-transform: none;
+  margin: 0;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: white;
+}
+header .header-content .header-content-inner h2 {
+  font-weight: 400;
+  margin: 18px 0 32px;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.85);
+  letter-spacing: 0;
+}
+header .header-content .header-content-inner hr {
+  margin: 28px auto;
+  border-top-color: $primary;
+}
+header .header-content .header-content-inner p {
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 17px;
+  margin-bottom: 32px;
+}
+@media (min-width: 768px) {
+  header {
+    min-height: 80vh;
+  }
+  header .header-content {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 0 40px;
+  }
+  header .header-content .header-content-inner h1 {
+    font-size: 52px;
+  }
+  header .header-content .header-content-inner h2 {
+    font-size: 22px;
+  }
+  header .header-content .header-content-inner p {
+    font-size: 18px;
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+// =====================================================================
+// Sections
+// =====================================================================
+.section-heading {
+  margin-top: 0;
+  font-weight: 800;
+  font-size: 28px;
+  letter-spacing: -0.01em;
+}
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 34px;
+  }
+}
+.service-box {
+  max-width: 360px;
+  margin: 40px auto 0;
+  background: $surface;
+  border-radius: $radius-lg;
+  padding: $space-xl $space-lg;
+  box-shadow: $shadow;
+  transition: all $transition;
+  text-align: center;
+}
+.service-box:hover {
+  transform: translateY(-4px);
+  box-shadow: $shadow-lg;
+}
+.service-box i {
+  color: $primary;
+  margin-bottom: 16px;
+}
+.service-box h3 {
+  font-size: 20px;
+  margin: 8px 0 10px;
+}
+.service-box h3 a {
+  color: $text;
+  text-decoration: none;
+}
+.service-box h3 a:hover {
+  color: $primary;
+}
+.service-box p {
+  margin-bottom: 0;
+  color: $text-muted;
+  font-size: 15px;
+}
+@media (min-width: 992px) {
+  .service-box {
+    margin: 20px auto 0;
+  }
+}
+
+section {
+  padding: 80px 0;
+}
+aside {
+  padding: 64px 0;
+  background: $surface-alt;
+}
+
+// =====================================================================
+// Other helpers
+// =====================================================================
+.bg-primary {
+  background-color: $primary;
+}
+.bg-dark {
+  background-color: $surface-alt;
+  color: $text;
+}
+.text-faded {
+  color: $text-muted;
+}
+.text-primary {
+  color: $primary;
+}
+
+::selection {
+  color: white;
+  text-shadow: none;
+  background: $primary;
+}
+::-moz-selection {
+  color: white;
+  text-shadow: none;
+  background: $primary;
+}
+
+#body-up {
+  margin-top: -19px;
+}
+#about-image {
+  height: 250px;
+  border-radius: $radius-lg;
+}
+#copyright,
+#social-links {
+  margin-top: 20px;
+}
+#social-links {
+  margin-bottom: 30px;
+}
+#copyright {
+  color: $text-muted;
+  font-size: 14px;
+}
+#copyright a {
+  color: $primary;
+  font-weight: 600;
+}
+#social-links a {
+  color: $text-muted;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: $font-ui;
+}
+#social-links a:hover {
+  color: $primary;
+}
+
+@media (max-width: 500px) {
+  #contact {
+    padding: 0;
+  }
+}

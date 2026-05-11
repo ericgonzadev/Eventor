@@ -1,3 +1,11 @@
 <% flash.each do |message_type, message| %>
-  <%= content_tag(:div, message, class: "alert alert-#{message_type} text-center", id: "body-up") %>
+  <%
+    css_type = case message_type.to_s
+               when "notice", "success" then "alert-success"
+               when "alert", "danger", "error" then "alert-danger"
+               when "warning" then "alert-warning"
+               else "alert-info"
+               end
+  %>
+  <%= content_tag(:div, message, class: "alert #{css_type} text-center", id: "body-up") %>
 <% end %>

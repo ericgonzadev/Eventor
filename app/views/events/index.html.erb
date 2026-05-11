@@ -1,50 +1,73 @@
-  <% provide(:title, "All Events") %> 
+<% provide(:title, "All Events") %>
 
-  <!-- Page Content -->
-  <div class="container">
-    <div class="row">
-      <div class="col-md-3 text-center" id="search-sidebar">
-        <h4><b>Search by</b></h4>
-        <%= form_tag events_path, method: :get do %>
-          <%= label_tag :search, "Name / Description: " %>
-          <%= text_field_tag :search, params[:search], placeholder: "Party, Soccer, Concert, etc.", class: "form-control" %>
-          <p class="help-block"></p>
+<div class="container page-wrap">
+  <div class="row">
+    <!-- Sidebar filters -->
+    <div class="col-md-3" id="search-sidebar">
+      <%= form_tag events_path, method: :get do %>
+        <div class="sidebar-card">
+          <h4>Search</h4>
 
-          <%= label_tag :location, "Location, Zip Code, City, State:" %>
-          <%= text_field_tag :location, params[:location], placeholder: "San Francisco, 90011, etc.", class: "form-control" %>
-          <p class="help-block"></p>
-
-          <%= label_tag :category, "Category: " %><br>
-          <%= select_tag :category, options_for_select([["All", "0"], ["Arts", "1"], ["Business", "2"], ["Charity", "3"], ["Education", "4"], ["Fashion", "5"], ["Film & Media", "6"], ["Food & Drink", "7"], ["Health", "8"], ["Hobbies", "9"], ["Holiday", "10"], ["Music", "11"], ["Science & Tech", "12"], ["Spirituality", "13"], ["Sports & Fitness", "14"], ["Travel & Outdoor", "15"], ["Other", "16"]], params[:category] ), class: "form-control" %>
-          <p class="help-block"></p>
-
-          <%= submit_tag "Search", name: nil, class: "btn btn-primary" %>
-          <p class="help-block"></p><br>
-
-          <h4><b>Filter by Timeline</b></h4>
-          <div class="list-group">
-            <%= submit_tag "Upcoming Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>
-            <%= submit_tag "Past Events", name: "timeline", id: "timeline", class: "list-group-item", style: "width: 100%" %>      
+          <div class="form-group">
+            <%= label_tag :search, "Name or description" %>
+            <%= text_field_tag :search, params[:search], placeholder: "Party, concert, soccer…", class: "form-control" %>
           </div>
-        <% end %>
 
-      </div>
+          <div class="form-group">
+            <%= label_tag :location, "Location" %>
+            <%= text_field_tag :location, params[:location], placeholder: "City, ZIP, address", class: "form-control" %>
+          </div>
 
-      <div class="col-md-9 text-center">
-        <div class="row">
-          <h3 id="events"><%= params[:timeline] == "Past Events" ? "Past Events" : "Upcoming Events" %></h3>
-          <div>(<%= page_entries_info @events %>)</div>
-          <hr>
-          <%= paginate @events %><br>
-          <% if @events.any? %>
-            <%= render @events %>
-          <% end %>
-          <div class="col-md-12 text-center">
-            <div class="row">
-              <%= paginate @events %>
-            </div>
+          <div class="form-group">
+            <%= label_tag :category, "Category" %>
+            <%= select_tag :category, options_for_select([
+                  ["All categories", "0"], ["Arts", "1"], ["Business", "2"], ["Charity", "3"],
+                  ["Education", "4"], ["Fashion", "5"], ["Film & Media", "6"], ["Food & Drink", "7"],
+                  ["Health", "8"], ["Hobbies", "9"], ["Holiday", "10"], ["Music", "11"],
+                  ["Science & Tech", "12"], ["Spirituality", "13"], ["Sports & Fitness", "14"],
+                  ["Travel & Outdoor", "15"], ["Other", "16"]
+                ], params[:category]), class: "form-control" %>
+          </div>
+
+          <%= submit_tag "Search", name: nil, class: "btn btn-primary btn-block" %>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>Timeline</h4>
+          <div class="list-group">
+            <%= submit_tag "Upcoming Events", name: "timeline", id: "timeline-upcoming",
+                  class: "list-group-item #{'active' if params[:timeline] != 'Past Events'}" %>
+            <%= submit_tag "Past Events", name: "timeline", id: "timeline-past",
+                  class: "list-group-item #{'active' if params[:timeline] == 'Past Events'}" %>
           </div>
         </div>
+      <% end %>
+    </div>
+
+    <!-- Main content -->
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="page-title" id="events">
+            <%= params[:timeline] == "Past Events" ? "Past Events" : "Upcoming Events" %>
+          </h2>
+          <p class="page-subtitle"><%= page_entries_info @events %></p>
+        </div>
       </div>
+
+      <% if @events.any? %>
+        <div class="row">
+          <%= render @events %>
+        </div>
+        <div class="row text-center mt-md">
+          <%= paginate @events %>
+        </div>
+      <% else %>
+        <div class="card text-center">
+          <p class="text-muted mb-md">No events match your search.</p>
+          <p class="text-muted">Try widening your filters or <%= link_to "browse all events", events_path %>.</p>
+        </div>
+      <% end %>
     </div>
   </div>
+</div>
